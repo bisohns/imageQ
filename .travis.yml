@@ -1,16 +1,21 @@
-image: python:3.6
+language: python
+python:
+  - "3.6"
 
+# Branches to enbale CI.
+branches:
+  only:
+    - master
 
-stages:
-  - deploy  
+# Command to install dependencies.
+install:
+  - pip install -r requirements.txt
 
 
 deploy:
-  stage: deploy
-  script: 
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_API_KEY
-  only:
-    - master
+  provider: heroku
+  api_key: $HEROKU_PRODUCTION_API_KEY
+  app: HEROKU_APP_NAME
+
+notifications:
+    slack: bisoncorps:urrq42VfAo4zJP2r6lH2dU8Y
