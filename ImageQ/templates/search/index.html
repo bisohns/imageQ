@@ -1,0 +1,14 @@
+<!-- 
+    TODO
+    - beautify page
+    - make file upload and search box mutually exclusive
+    - Include powered by google search on the extreme right bottom
+    - file upload must be image
+ -->
+{% load static %}   
+<img src="{% static 'images/imageq_trans.png' %}"/>
+<form type="get" action="." style="margin: 0">
+    <input  id="search_box" type="text" name="search_box"  placeholder="Input image url" >
+    <input id="upload_box" type="file">
+    <button id="search_submit" type="submit" >Search</button>
+</form>

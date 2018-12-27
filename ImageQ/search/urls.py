@@ -17,3 +17,10 @@
 		Copyright (c) 2018. Domnan Diretnan. All rights reserved
 
  """
+
+from django.urls import path
+from ImageQ.search.views import IndexView
+
+urlpatterns = [
+	path('', IndexView.as_view())
+]
