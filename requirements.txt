@@ -1,0 +1,7 @@
+dj-database-url
+django
+whitenoise
+gunicorn
+keras
+tensorflow
+tensorboard
