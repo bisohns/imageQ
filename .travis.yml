@@ -7,6 +7,11 @@ branches:
   only:
     - master
 
+# Command to install dependencies.
+install:
+  - pip install -r requirements.txt
+
+script: python manage.py
 
 deploy:
   provider: heroku
