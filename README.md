@@ -2,6 +2,7 @@
 
 Image search engine powered by Django and Keras
 
+[![Build Status](https://travis-ci.org/deven96/ImageQ.svg?branch=master)](https://travis-ci.com/deven96/ImageQ)![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=deven96_ImageQ&metric=alert_status)
 
 - [ImageQ](#imageq)
   - [Getting Started](#getting-started)

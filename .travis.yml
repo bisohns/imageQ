@@ -2,16 +2,19 @@ language: python
 python:
   - "3.6"
 
+addons:
+  sonarcloud:
+    # create sonar connection for code health analysis
+    organization: "deven96-github" 
+    token:
+      secure: $SONAR_TOKEN
+
 # Branches to enbale CI.
 branches:
   only:
     - master
 
-# Command to install dependencies.
-install:
-  - pip install -r requirements.txt
-
-script: python manage.py
+script: sonar-scanner
 
 deploy:
   provider: heroku
