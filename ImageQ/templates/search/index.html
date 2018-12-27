@@ -8,7 +8,9 @@
 {% load static %}   
 <img src="{% static 'images/imageq_trans.png' %}"/>
 <form type="get" action="." style="margin: 0">
-    <input  id="search_box" type="text" name="search_box"  placeholder="Input image url" >
-    <input id="upload_box" type="file">
+    <div id="inputs">
+        <input  id="search_box" type="url" name="search_box"  placeholder="Input image url" >
+        <input id="upload_box" type="file" accept="image/png, image/jpeg">
+    </div>
     <button id="search_submit" type="submit" >Search</button>
 </form>
