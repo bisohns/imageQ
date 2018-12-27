@@ -71,6 +71,6 @@ The `master` branch of the repo is linked to automatically deploy to heroku at h
 
 ## Code Structure
 
-All important settings are in the `ImageQ.settings.production.py` file.<br />
+All important production settings are in the `ImageQ.settings.production.py` file.<br />
 Settings should be inherited from `ImageQ.settings.common.py` for development or used as it is<br />
 All Celery async tasks are located in `tasks.py` of each app file in each app directory
