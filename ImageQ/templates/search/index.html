@@ -6,11 +6,52 @@
     - file upload must be image
  -->
 {% load static %}   
-<img src="{% static 'images/imageq_trans.png' %}"/>
-<form type="get" action="." style="margin: 0">
-    <div id="inputs">
-        <input  id="search_box" type="url" name="search_box"  placeholder="Input image url" >
-        <input id="upload_box" type="file" accept="image/png, image/jpeg">
-    </div>
-    <button id="search_submit" type="submit" >Search</button>
-</form>
+<html>
+    <head>
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+
+        <div class="vertical-center">
+          <div class="container container-center">
+            <div class="row">
+              <div class="text-center col-md-12">
+               
+                <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
+                
+                <div class="form-adjustment">
+                  <form action="#" class="form-inline">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control input-lg" id="im-search">
+                      </div>  
+                    </div>
+                  </form>
+                </div>
+                
+                <div class="button-adjustment">
+                  <div class="col-md-6 col-md-offset-3">
+                    <button class="btn btn-md">Image URL</button>
+                    <button class="btn btn-md">Upload Image</button> 
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <footer class="navbar navbar-default navbar-fixed-bottom">
+         
+          <div class="container-fluid">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">PyPI</a></li>
+                <li><a href="#">BisonCorps</a></li>
+              </ul>
+            
+          </div>
+          
+        </footer>
+</html>
