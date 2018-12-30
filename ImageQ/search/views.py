@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from ImageQ.processor.predictors import URLPredictor
 
@@ -17,3 +18,5 @@ class IndexView(TemplateView):
                 predictions = predictor.get_prediction()
                 html = f"<html><body>Top posibilities are {predictions}</body></html>"
                 return HttpResponse(html)
+            else:
+                return render(request, self.template_name)
