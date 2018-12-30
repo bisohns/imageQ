@@ -1,5 +1,7 @@
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from ImageQ.processor.predictors import URLPredictor
+
 
 class IndexView(TemplateView):
     template_name = "search/index.html"
@@ -13,4 +15,5 @@ class IndexView(TemplateView):
                 predictor = URLPredictor(image_url=url)
                 #get top predictions
                 predictions = predictor.get_prediction()
-
+                html = f"<html><body>Top posibilities are {predictions}</body></html>"
+                return HttpResponse(html)
