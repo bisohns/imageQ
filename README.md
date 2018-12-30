@@ -81,6 +81,7 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 - Move keras prediction to API (separate django or flask app)
 - Setup GCP serving pipeline for API
+- Create Tensorflow ResNet continous training pipeline
 - Setup training pipeline to add a new class per mispredicted image from user
 - Make use of protobuff to speed up training
 - Optimize requests to beat 30 sec heroku timeout :sweat_smile:
