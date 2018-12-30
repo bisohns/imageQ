@@ -21,11 +21,6 @@
 
 import urllib3
 from ImageQ.processor.base import BasePredictor, RequestHandler
-from keras.applications.resnet50 import decode_predictions  
-
-# decode the results into a list of tuples (class, description, probability)
-# (one such list for each sample in the batch)
-print('Predicted:', decode_predictions(preds, top=3)[0])
 
 class URLPredictor(BasePredictor):
     """This is a URL class predictor for the ResNet model 
@@ -44,7 +39,8 @@ class URLPredictor(BasePredictor):
         """Image path from url downloaded by urllib3
         """
         if self.request_handler.is_image:
-            return self.request_handler.image_path
+            self.request_handler.save()
+            return self.request_handler.image_location
         else:
             raise TypeError(f"Expected one of image/(png, jpeg, jpg) \
                             Got {self.request_handler.type}")

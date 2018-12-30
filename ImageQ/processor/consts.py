@@ -16,8 +16,9 @@ class FS:
     PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     APP_NAME = os.path.basename(PROJECT_DIR)
 
-    SEARCH_DIR = os.path.join(PROJECT_DIR, "search")
-    CACHE_DIR = os.path.join(PROJECT_DIR, "cache")
+    IMAGEQ_DIR = os.path.join(PROJECT_DIR, "ImageQ")
+    SEARCH_DIR = os.path.join(IMAGEQ_DIR, "search")
+    CACHE_DIR = os.path.join(IMAGEQ_DIR, "cache")
 
     SEARCH_CACHE = os.path.join(CACHE_DIR, "images")
     LOG_DIR = os.path.join(CACHE_DIR, "logs")

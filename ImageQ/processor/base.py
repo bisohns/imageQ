@@ -40,7 +40,10 @@ class BasePredictor(object):
         """Constructor method
         """
         self.__metaclass__  = abc.ABCMeta
-        self.model = ResNet50(weights='imagenet')
+
+    @property
+    def model(self):
+        return ResNet50(weights='imagenet')
 
     @property
     def image_path(self):
@@ -116,6 +119,6 @@ class RequestHandler:
         with open(self.image_location, 'wb') as stream:
             stream.write(self.data)
 
-if __name__ == "__main__":
-    a = RequestHandler("https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg", "test_flower")
-    a.save()
+# if __name__ == "__main__":
+#     a = RequestHandler("https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?cs=srgb&dl=beauty-bloom-blue-67636.jpg&fm=jpg", "test_flower")
+#     a.save()
