@@ -10,6 +10,7 @@ Image search engine powered by Django and Keras
   - [Running Locally](#running-locally)
   - [Deploy](#deploy)
   - [Code Structure](#code-structure)
+  - [Todo](#todo)
 
 ## Getting Started
 
@@ -75,3 +76,16 @@ The `master` branch of the repo is linked to automatically deploy to heroku at h
 All important production settings are in the `ImageQ.settings.production.py` file.<br />
 Settings should be inherited from `ImageQ.settings.common.py` for development or used as it is<br />
 All Celery async tasks are located in `tasks.py` of each app file in each app directory
+
+## Todo
+
+- Move keras prediction to API (separate django or flask app)
+- Setup GCP serving pipeline for API
+- Setup training pipeline to add a new class per mispredicted image from user
+- Make use of protobuff to speed up training
+- Optimize requests to beat 30 sec heroku timeout :sweat_smile:
+- Train ImageNet with more classes
+- Beautify ImageQ query page
+- Add upload image functionality
+- Receive top predictions from API and display in google-like format
+- Incorporate bootstrap locally? 
