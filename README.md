@@ -71,12 +71,11 @@ To view the API locally on port 9000
 
 ## Deploy
 
-The `master` branch of the repo is linked to automatically deploy to heroku at https://bisoncorps-imageq.herokuapp.com
-It sends requests to the deployed prediction API at https://bisoncorps-imageqapi.herokuapp.com 
+The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com) and it sends requests to the deployed [prediction API](https://bisoncorps-imageqapi.herokuapp.com)
 
 ## Documentation
 
-Documentation is available on [Github Pages]((https://deven96.github.io/ImageQ)
+Documentation is available on [Github Pages](https://deven96.github.io/ImageQ)
 
 ## Code Structure
 

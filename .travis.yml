@@ -19,15 +19,16 @@ branches:
   only:
     - master
 
+deploy:
+  provider: heroku
+  api_key: $HEROKU_PRODUCTION_API_KEY
+  app: $HEROKU_APP_NAME
+
 script: 
 - sonar-scanner
 # build docs on github pages
 - ./docs.sh
 
-deploy:
-  provider: heroku
-  api_key: $HEROKU_PRODUCTION_API_KEY
-  app: $HEROKU_APP_NAME
 
 notifications:
 # slack channel notification
