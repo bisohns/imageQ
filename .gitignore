@@ -136,6 +136,3 @@ tags
 *.retry
 local_vars.yml
 
-#ignore flask api
-flask/*
-flask_api/*
