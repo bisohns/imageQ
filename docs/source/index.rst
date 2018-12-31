@@ -1,5 +1,5 @@
 .. ImageQ documentation master file, created by
-   sphinx-quickstart on Mon Dec 31 06:19:12 2018.
+   sphinx-quickstart on Mon Dec 31 06:51:40 2018.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 

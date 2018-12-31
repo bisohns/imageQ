@@ -12,16 +12,16 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../ImageQ'))
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'ImageQ'
-copyright = '2018, Diretnan Domnan, Mmadu Manasseh'
-author = 'Diretnan Domnan, Mmadu Manasseh'
+copyright = '2018, Diretnan Domnan, Manasseh Mmadu'
+author = 'Diretnan Domnan, Manasseh Mmadu'
 
 # The short X.Y version
 version = ''
@@ -40,6 +40,7 @@ release = '1.0.1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
@@ -133,7 +134,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'ImageQ.tex', 'ImageQ Documentation',
-     'Diretnan Domnan, Mmadu Manasseh', 'manual'),
+     'Diretnan Domnan, Manasseh Mmadu', 'manual'),
 ]
 
 
@@ -178,6 +179,11 @@ epub_exclude_files = ['search.html']
 
 
 # -- Extension configuration -------------------------------------------------
+
+# -- Options for intersphinx extension ---------------------------------------
+
+# Example configuration for intersphinx: refer to the Python standard library.
+intersphinx_mapping = {'https://docs.python.org/': None}
 
 # -- Options for todo extension ----------------------------------------------
 
