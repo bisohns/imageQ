@@ -11,6 +11,9 @@ addons:
     token:
       secure: $SONAR_TOKEN
 
+git:
+    submodules: false
+
 # Branches to enbale CI.
 branches:
   only:
