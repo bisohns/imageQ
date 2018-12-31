@@ -41,6 +41,7 @@ release = '1.0.1'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
+    'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
 ]
 
