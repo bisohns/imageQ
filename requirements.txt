@@ -2,7 +2,10 @@ dj-database-url
 django
 whitenoise
 gunicorn
+flask
 numpy
+sphinx
+celery
 keras
 tensorflow
 tensorboard

@@ -1,14 +1,16 @@
 # ImageQ
 
-Image search engine powered by Django and Keras
+Image search engine powered by Django
 
 [![Build Status](https://travis-ci.org/deven96/ImageQ.svg?branch=master)](https://travis-ci.com/deven96/ImageQ)![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=deven96_ImageQ&metric=alert_status)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 - [ImageQ](#imageq)
   - [Getting Started](#getting-started)
     - [Installation](#installation)
   - [Running Locally](#running-locally)
   - [Deploy](#deploy)
+  - [Documentation](#documentation)
   - [Code Structure](#code-structure)
   - [Todo](#todo)
 
@@ -70,6 +72,11 @@ To view the API locally on port 9000
 ## Deploy
 
 The `master` branch of the repo is linked to automatically deploy to heroku at https://bisoncorps-imageq.herokuapp.com
+It sends requests to the deployed prediction API at https://bisoncorps-imageqapi.herokuapp.com 
+
+## Documentation
+
+Documentation is available on [Github Pages]((https://deven96.github.io/ImageQ)
 
 ## Code Structure
 
@@ -79,13 +86,6 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 ## Todo
 
-- Move keras prediction to API (separate django or flask app)
-- Setup GCP serving pipeline for API
-- Create Tensorflow ResNet continous training pipeline
-- Setup training pipeline to add a new class per mispredicted image from user
-- Make use of protobuff to speed up training
-- Optimize requests to beat 30 sec heroku timeout :sweat_smile:
-- Train ImageNet with more classes
 - Beautify ImageQ query page
 - Add upload image functionality
 - Receive top predictions from API and display in google-like format

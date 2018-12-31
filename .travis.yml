@@ -1,4 +1,6 @@
 language: python
+sudo: required
+
 python:
   - "3.6"
 
@@ -14,14 +16,16 @@ branches:
   only:
     - master
 
-script: sonar-scanner
+script: 
+- sonar-scanner
+# build docs on github pages
+- ./docs.sh
 
 deploy:
   provider: heroku
   api_key: $HEROKU_PRODUCTION_API_KEY
   app: $HEROKU_APP_NAME
-  run:
-    - "python init_imagenet.py"
 
 notifications:
+# slack channel notification
     slack: bisoncorps:urrq42VfAo4zJP2r6lH2dU8Y
