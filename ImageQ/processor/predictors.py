@@ -25,12 +25,15 @@ from ImageQ.processor.base import BasePredictor, RequestHandler
 class URLPredictor(BasePredictor):
     """This is a URL class predictor for the ResNet model 
 
+    :param prediction_api: url of the prediction api to send requests to
+    :type prediction_api: str
     :param image_url: url to the image to be predicted
     :type image_url: str
     """
-    def __init__(self, image_url):
+    def __init__(self, prediction_api, image_url):
         """Constructor method
         """
+        self.prediction_api = prediction_api
         self.image_url = image_url
         self.request_handler = RequestHandler(self.image_url, "current")
 

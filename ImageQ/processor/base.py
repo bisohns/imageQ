@@ -19,10 +19,8 @@
  """
 import abc
 import urllib3
+import requests
 import numpy as np
-from keras.applications.resnet50 import (ResNet50, decode_predictions,
-                                         preprocess_input)
-from keras.preprocessing import image
 from ImageQ.processor.consts import FS, File, IMAGE_TYPES
 
 
@@ -40,59 +38,36 @@ class BasePredictor(object):
         """Constructor method
         """
         self.__metaclass__  = abc.ABCMeta
-
-    @property
-    def model(self):
-        return ResNet50(weights='imagenet')
+        self.prediction_api = None
 
     @property
     def image_path(self):
         raise NotImplementedError
 
-
-    def process_image(self):
-        """Image preprocessing method for image at path
-
-        :return processed: processed and resized image array
-        :rtype: `np.ndarray`
+    def predict(self):
+        """ send requests to the prediction api
         """
-        img = image.load_img(self.image_path, target_size=(224, 224))
-        x = image.img_to_array(img)
-        x = np.expand_dims(x, axis=0)
-        processed = preprocess_input(x)
-        
-        return processed
-
-
-    def get_prediction(self, top=3):
-        """Returns the prediction for the image
-
-        :param top: number of top classifications to return, defaults to 3
-        :type top: int
-        :return predictions: top predictions
-        :rtype: list
-        """
-        predictions = list()
-        preds = self.model.predict(self.process_image())
-        for i in decode_predictions(preds, top=top)[0]:
-            predictions.append(i[1])
-        
-        return predictions
+        files = {'image': open(self.image_path, 'rb')}
+        if not isinstance(self.prediction_api, type(None)):
+            r = requests.post(self.prediction_api, files=files)
+        else:
+            raise AttributeError("Attribute <prediction_api> is of type None")
+        return r.content
 
 class RequestHandler:
     """Request handler
     """
-    def __init__(self, url, image_name):
+    def __init__(self, image_url, image_name):
         """Constructor
 
-        :param url: link to image
-        :type url: str
+        :param image_url: link to image
+        :type image_url: str
         :param image_name: final name of image when downloaded
         :type image_name: str
         """
-        self.url = url
+        self.image_url = image_url
         self.http = urllib3.PoolManager()
-        self.ret_val = self.http.request('GET', url)
+        self.ret_val = self.http.request('GET', image_url)
         self.type = (self.ret_val.headers)['Content-Type']
         self.data = self.ret_val.data
         self.image_location = str(FS.SEARCH_CACHE + "/{0}.{1}").format(image_name, self.ext)

@@ -18,10 +18,11 @@
                 <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
                 
                 <div class="form-adjustment">
-                  <form action="." method="GET" class="form-inline">
+                  <form action="search/" method="POST" class="form-inline">
+                    {% csrf_token %}
                     <div class="form-group">
                       <div class="input-group">
-                        <input type="text" name="im-search" class="form-control input-lg" id="im-search">
+                        <input type="url" name="im-search" class="form-control input-lg" id="im-search">
                       </div>  
                     </div>
                   </form>

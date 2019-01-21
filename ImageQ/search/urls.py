@@ -19,8 +19,9 @@
  """
 
 from django.urls import path
-from ImageQ.search.views import IndexView
+from ImageQ.search.views import *
 
 urlpatterns = [
-	path('', IndexView.as_view())
+	path('', IndexView.as_view()),
+	path('search/', SearchView.as_view())
 ]

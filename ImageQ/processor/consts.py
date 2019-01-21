@@ -154,4 +154,3 @@ IMAGE_TYPES = {
     'image/jpeg': "jpeg",
     'image/jpg': "jpg",
 }
-

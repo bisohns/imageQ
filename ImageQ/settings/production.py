@@ -14,3 +14,4 @@ DATABASES = {
     'default': dj_database_url.parse('postgres://xguujvquxmfkkg:7bc9370d3a554fdc096675e99aafb77a95e0bf1a2cde6e4c14e9e3019361171d@ec2-54-247-125-116.eu-west-1.compute.amazonaws.com:5432/d6iei61f1ie5lg')
 }
 
+PREDICTION_API = "https://imageqapi.appspot.com/predict"
