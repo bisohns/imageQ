@@ -40,6 +40,9 @@ class URLPredictor(BasePredictor):
     @property
     def image_path(self):
         """Image path from url downloaded by urllib3
+        
+        :returns: path of the image
+        :rtype: str
         """
         if self.request_handler.is_image:
             self.request_handler.save()

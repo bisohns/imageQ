@@ -33,6 +33,11 @@ __all__ = [
 
 class BasePredictor(object):
     """This is the basic predictor extended by all other predictors
+        Two main properties/attributes must be declared by subclasses
+
+        image_path[str]: path to the image saved locally
+        prediction_api[str]: url of the AI prediction API predict route
+
     """
     def __init__(self):
         """Constructor method
@@ -46,6 +51,9 @@ class BasePredictor(object):
 
     def predict(self):
         """ send requests to the prediction api
+
+        :returns: json response from the api
+        :rtype: dict
         """
         files = {'image': open(self.image_path, 'rb')}
         if not isinstance(self.prediction_api, type(None)):
@@ -68,13 +76,18 @@ class RequestHandler:
         self.image_url = image_url
         self.http = urllib3.PoolManager()
         self.ret_val = self.http.request('GET', image_url)
+        # image type
         self.type = (self.ret_val.headers)['Content-Type']
+        # image data
         self.data = self.ret_val.data
+        # image location
         self.image_location = str(FS.SEARCH_CACHE + "/{0}.{1}").format(image_name, self.ext)
     
     @property
     def is_image(self):
-        """Is resource at link an image?
+        """Is resource at link an image
+
+        :rtype: bool
         """
         if self.type in IMAGE_TYPES.keys():
             return True
@@ -83,6 +96,11 @@ class RequestHandler:
 
     @property
     def ext(self):
+        """ extension of the image
+
+        :returns: extension of the image
+        :rtype: str
+        """
         for i in IMAGE_TYPES.values():
             if self.type.endswith(i):
                 return i
