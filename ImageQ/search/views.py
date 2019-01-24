@@ -22,5 +22,5 @@ class SearchView(FormView):
     success_url = '/results'
 
     def form_valid(self, form):
-        print(form.data);
+        print(form.cleaned_data);
         return super().form_valid(form)

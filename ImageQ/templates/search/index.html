@@ -33,20 +33,37 @@
     <main class="container-fluid d-flex flex-grow-1 flex-column justify-content-center align-items-center">
       <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
       <div class="mt-5">
-        <form action="search/" method="POST" class="form-inline">
+      {% if form.url.errors %}
+          <div class="alert alert-danger">
+            {% for error in form.url.errors %}
+              {{ error|escape }}
+            {% endfor %}
+          </div>
+      {% elif form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% endif %}
+        {% if form.is_multipart %}
+          <form enctype="multipart/form-data" method="post">
+        {% else %}
+          <form method="post">
+        {% endif %}
           {% csrf_token %}
           <div class="form-group">
             <div class="input-group">
               {{ form.url|add_class:'form-control input-lg' }}
             </div>
           </div>
+          <div class="d-flex flex-row justify-content-end mt-2">
+              <button type="submit" class="btn btn-md mr-4">Image URL</button>
+              <button class="btn btn-md">Upload Image</button>
+          </div>
         </form>
       </div>
 
-      <div class="d-flex flex-row justify-content-around mt-2">
-          <button class="btn btn-md mr-4">Image URL</button>
-          <button class="btn btn-md">Upload Image</button>
-      </div>
     </main>
     <footer>
       <nav class="d-flex justify-content-end navbar navbar-expand-lg fixed-bottom navbar-default">
@@ -57,9 +74,9 @@
         </ul>
       </nav>
 
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
+      <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
     </footer>
 >>>>>>> reimplemented template with Bootstrap 4
 </html>
