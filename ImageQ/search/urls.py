@@ -1,7 +1,7 @@
-"""@desc 
+"""@desc
 		Search's URL routes
 
- 	@author 
+ 	@author
  		Domnan Diretnan
  		Artificial Intelligence Enthusiast & Software Engineer.
  		Email: diretnandomnan@gmail.com
@@ -22,6 +22,5 @@ from django.urls import path
 from ImageQ.search.views import *
 
 urlpatterns = [
-	path('', IndexView.as_view()),
-	path('search/', SearchView.as_view())
+	path('', SearchView.as_view()),
 ]
