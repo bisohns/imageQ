@@ -22,5 +22,6 @@ from django.urls import path
 from ImageQ.search.views import *
 
 urlpatterns = [
-	path('', SearchView.as_view()),
+    path('', SearchView.as_view()),
+    path('results/', ResultView.as_view()),
 ]

@@ -59,7 +59,7 @@ class SearchForm(forms.Form):
                            prediction_api=settings.PREDICTION_API,
                            image=image_data)
              # TODO Get prediction and return dictionary of predictions
-            print(urlpredictor.predict())
+            return { "response": bytes.decode(urlpredictor.predict()), "image_url": url }
         
 
 
