@@ -1,82 +1,41 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load beautify %}
-<!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="eng">
-    <head>
-        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
-        <link rel="stylesheet" href="{% static 'css/index.css' %}">
-        <title>
-          ImageQ 
-      </title>
-    </head>
-    <body>
-        <div class="vertical-center">
-            <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
-            <form action="search/" method="POST" class="form-adjustment">
-              {% csrf_token %}
-                  <input type="url" name="im-search" class="form-control input-lg" id="im-search">
-            </form>
+
+{% block content %}
+  <main class="container-fluid d-flex flex-grow-1 flex-column justify-content-center align-items-center">
+    <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
+    <div class="mt-5">
+    {% if form.url.errors %}
+        <div class="alert alert-danger">
+          {% for error in form.url.errors %}
+            {{ error|escape }}
+          {% endfor %}
         </div>
-    </body>
-=======
-<html>
-  <head>
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>
-      ImageQ
-    </title>
-  </head>
-  <body class='d-flex flex-column' style="min-height: 100vh">
-    <main class="container-fluid d-flex flex-grow-1 flex-column justify-content-center align-items-center">
-      <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
-      <div class="mt-5">
-      {% if form.url.errors %}
-          <div class="alert alert-danger">
-            {% for error in form.url.errors %}
-              {{ error|escape }}
-            {% endfor %}
-          </div>
-      {% elif form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-          <div class="alert alert-danger">
-            {{ error }}
-          </div>
-        {% endfor %}
+    {% elif form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+          {{ error }}
+        </div>
+      {% endfor %}
+    {% endif %}
+      {% if form.is_multipart %}
+        <form enctype="multipart/form-data" method="post">
+      {% else %}
+        <form method="post">
       {% endif %}
-        {% if form.is_multipart %}
-          <form enctype="multipart/form-data" method="post">
-        {% else %}
-          <form method="post">
-        {% endif %}
-          {% csrf_token %}
-          <div class="form-group">
-            <div class="input-group">
-              {{ form.url|add_class:'form-control input-lg' }}
-            </div>
+        {% csrf_token %}
+        <div class="form-group">
+          <div class="input-group">
+            {{ form.url|add_class:'form-control input-lg' }}
           </div>
-          <div class="d-flex flex-row justify-content-end mt-2">
-              <button type="submit" class="btn btn-md mr-4">Image URL</button>
-              <button class="btn btn-md">Upload Image</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="d-flex flex-row justify-content-end mt-2">
+            <button type="submit" class="btn btn-md mr-4">Image URL</button>
+            <button class="btn btn-md">Upload Image</button>
+        </div>
+      </form>
+    </div>
 
-    </main>
-    <footer>
-      <nav class="d-flex justify-content-end navbar navbar-expand-lg fixed-bottom navbar-default">
-        <ul class="navbar-nav">
-          <li class="nav-item" ><a class="nav-link" href="#">GitHub</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">PyPI</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">BisonCorps</a></li>
-        </ul>
-      </nav>
-
-      <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
-      <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
-    </footer>
->>>>>>> reimplemented template with Bootstrap 4
-</html>
+  </main>
+{% endblock %}
