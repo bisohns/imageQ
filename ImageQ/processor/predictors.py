@@ -34,12 +34,12 @@ class URLPredictor(BasePredictor):
         >>> predictor = URLPredictor(prediction_api="https://imageqapi.appspot.com/predict", image_url="https://example_image.com/image-jpg")
         >>> predictor.predict()
     """
-    def __init__(self, prediction_api, image_url):
+    def __init__(self, prediction_api, image):
         """Constructor method
         """
         self.prediction_api = prediction_api
-        self.image_url = image_url
-        self.request_handler = RequestHandler(self.image_url, "current")
+        self.image = image
+        self.request_handler = RequestHandler(self.image, "current")
 
     @property
     def image_path(self):

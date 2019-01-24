@@ -65,23 +65,21 @@ class BasePredictor(object):
 class RequestHandler:
     """Request handler
     """
-    def __init__(self, image_url, image_name):
+    def __init__(self, image, image_name):
         """Constructor
 
-        :param image_url: link to image
-        :type image_url: str
+        :param image:  A dictionary containing image data including it's url, type
+        :type image: dict
         :param image_name: final name of image when downloaded
         :type image_name: str
         """
-        self.image_url = image_url
+        self.image = image
         self.http = urllib3.PoolManager()
-        self.ret_val = self.http.request('GET', image_url)
-        # image type
+        self.ret_val = self.http.request('GET', image.get('url'))
         self.type = (self.ret_val.headers)['Content-Type']
         # image data
         self.data = self.ret_val.data
-        # image location
-        self.image_location = str(FS.SEARCH_CACHE + "/{0}.{1}").format(image_name, self.ext)
+        self.image_location = str(FS.SEARCH_CACHE + "/{0}.{1}").format(image_name, image.get('ext'))
 
     def save(self):
         """Save the image

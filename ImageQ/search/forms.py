@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 from ImageQ.processor.predictors import URLPredictor
 
 class SearchForm(forms.Form):
+    image_type = ""
     image = forms.ImageField(required=False)
     url = forms.URLField(required=False)
 
@@ -30,6 +31,7 @@ class SearchForm(forms.Form):
         for e in res.getheaders():
             if e[0] == 'Content-Type':
                 if e[1].split('/')[0] == 'image':
+                    self.image_type = e[1].split('/')[1]
                     return True
             # For Redirects and shortened URLS
             if e[0] == 'location':
@@ -52,11 +54,12 @@ class SearchForm(forms.Form):
         url = self.cleaned_data.get('url')
         image = self.cleaned_data.get('image')
         if url: 
-             urlpredictor = URLPredictor(
+            image_data = { "url": url, "ext": self.image_type }
+            urlpredictor = URLPredictor(
                            prediction_api=settings.PREDICTION_API,
-                           image_url=url)
+                           image=image_data)
              # TODO Get prediction and return dictionary of predictions
-             print(urlpredictor.predict())
+            print(urlpredictor.predict())
         
 
 
