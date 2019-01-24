@@ -18,13 +18,14 @@
 
  """
 import abc
-import urllib3
+import uuid
+from django.core import files
+from io import BytesIO
 import requests
 import numpy as np
 from ImageQ.processor.consts import FS, File, IMAGE_TYPES
+from ImageQ.search.models import Prediction
 
-
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 __all__ = [
@@ -65,7 +66,7 @@ class BasePredictor(object):
 class RequestHandler:
     """Request handler
     """
-    def __init__(self, image, image_name):
+    def __init__(self, image):
         """Constructor
 
         :param image:  A dictionary containing image data including it's url, type
@@ -74,16 +75,19 @@ class RequestHandler:
         :type image_name: str
         """
         self.image = image
-        self.http = urllib3.PoolManager()
-        self.ret_val = self.http.request('GET', image.get('url'))
-        self.type = (self.ret_val.headers)['Content-Type']
-        # image data
-        self.data = self.ret_val.data
-        self.image_location = str(FS.SEARCH_CACHE + "/{0}.{1}").format(image_name, image.get('ext'))
+        response = requests.get(image.get('url'))
+        if response.status_code != requests.codes.ok:
+            return Exception("Something just happened Right Now")
+        self.fp = BytesIO()
+        self.fp.write(resp.content)
 
     def save(self):
-        """Save the image
+        """Save the image in the Prediction Model
         """
-        File.make_dirs(FS.SEARCH_CACHE)
-        with open(self.image_location, 'wb') as stream:
-            stream.write(self.data)
+        # Generate a random string as file_name
+        image_name = uuid.uuid1().hex
+        prediction = Prediction()
+        # Save the Image without Downloading it
+        prediction.image.save(f'{image_name}.{self.image.ext}', file.File(self.fp))
+        return prediction
+

@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
+from django.views import generic
 from .forms import SearchForm
+from .models import Prediction
 
 
 class SearchView(FormView):
@@ -12,14 +13,12 @@ class SearchView(FormView):
     success_url = '/results'
 
     def form_valid(self, form):
-        # the form predict values should be added to context and passed to the result rendering view
-        prediction_results = form.predict()
-        return reverse('results', kwargs={'prediction_results': prediction_results})
+        prediction = form.predict()
+        return reverse('results', args=(prediction.id, ))
 
 
-class ResultView(TemplateView):
+class ResultView(generic.DetailView):
+    model = Prediction
+    context_object_name = 'prediction'
+    template_name = "search/results.html"
 
-    def get_context_data(self, *args, **kwargs):
-        print(*args, **kwargs)
-        context = super().get_context_data(**kwargs)
-        return context

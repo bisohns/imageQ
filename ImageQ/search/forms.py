@@ -2,7 +2,8 @@ from django import forms
 import http.client
 from django.conf import settings
 from urllib.parse import urlparse
-from ImageQ.processor.predictors import URLPredictor
+from ImageQ.processor.predictors import URLPredictor, RequestHandler
+from ImageQ.search.models import Prediction
 
 class SearchForm(forms.Form):
     image_type = ""
@@ -55,14 +56,22 @@ class SearchForm(forms.Form):
         image = self.cleaned_data.get('image')
         if url: 
             image_data = { "url": url, "ext": self.image_type }
-            urlpredictor = URLPredictor(
-                           prediction_api=settings.PREDICTION_API,
-                           image=image_data)
-             # TODO Get prediction and return dictionary of predictions
-            return { "response": bytes.decode(urlpredictor.predict()), "image_url": url }
+            prediction = None
+            # Downloads the Image
+            try: 
+                req = RequestHandler(image_data)
+            except:
+                print("something just happened right now ")
+            else:
+                # Get the Downloaded Image Model for prediction
+                prediction_model = req.save()
+                # Predicts the IMage and stores data in database
+                urlpredictor = URLPredictor(
+                               prediction_api=settings.PREDICTION_API,
+                               image=_image)
+                # Store the decoded JSON Predictions
+                _predictions = bytes.decode(urlpredctor.predict())
+                prediction_model.predictions = _predictions_
+                prediction_model.save()
+        return prediction
         
-
-
-
-
- 

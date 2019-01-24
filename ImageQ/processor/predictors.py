@@ -20,6 +20,8 @@
 
 
 import urllib3
+import os
+from django.conf import settings
 from ImageQ.processor.base import BasePredictor, RequestHandler
 
 class URLPredictor(BasePredictor):
@@ -35,11 +37,10 @@ class URLPredictor(BasePredictor):
         >>> predictor.predict()
     """
     def __init__(self, prediction_api, image):
-        """Constructor method
+        """ Constructor method
         """
         self.prediction_api = prediction_api
-        self.image = image
-        self.request_handler = RequestHandler(self.image, "current")
+        self.image = image.image
 
     @property
     def image_path(self):
@@ -48,8 +49,7 @@ class URLPredictor(BasePredictor):
         :returns: path of the image
         :rtype: str
         """
-        self.request_handler.save()
-        return self.request_handler.image_location
+        return os.path.join(settings.BASE_DIR, self.image.path)
 
 
 class UploadPredictor(BasePredictor):
