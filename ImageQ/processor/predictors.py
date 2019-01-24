@@ -48,12 +48,8 @@ class URLPredictor(BasePredictor):
         :returns: path of the image
         :rtype: str
         """
-        if self.request_handler.is_image:
-            self.request_handler.save()
-            return self.request_handler.image_location
-        else:
-            raise TypeError(f"Expected one of image/(png, jpeg, jpg) \
-                            Got {self.request_handler.type}")
+        self.request_handler.save()
+        return self.request_handler.image_location
 
 
 class UploadPredictor(BasePredictor):

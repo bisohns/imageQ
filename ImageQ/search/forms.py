@@ -1,6 +1,8 @@
 from django import forms
 import http.client
+from django.conf import settings
 from urllib.parse import urlparse
+from ImageQ.processor.predictors import URLPredictor
 
 class SearchForm(forms.Form):
     image = forms.ImageField(required=False)
@@ -43,6 +45,19 @@ class SearchForm(forms.Form):
         if not (url or image):
             raise forms.ValidationError("You must provide either an image or a url to an image")
         return cleaned_data
+
+    def predict(self):
+        """ Run the prediction over the uploaded image/ URL 
+        """
+        url = self.cleaned_data.get('url')
+        image = self.cleaned_data.get('image')
+        if url: 
+             urlpredictor = URLPredictor(
+                           prediction_api=settings.PREDICTION_API,
+                           image_url=url)
+             # TODO Get prediction and return dictionary of predictions
+             print(urlpredictor.predict())
+        
 
 
 

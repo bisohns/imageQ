@@ -16,3 +16,4 @@ DATABASES = {
     }
 }
 
+PREDICTION_API = "https://imageqapi.appspot.com/predict"

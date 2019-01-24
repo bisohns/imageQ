@@ -7,20 +7,12 @@ from django.views.generic.edit import FormView
 from .forms import SearchForm
 
 
-# class SearchView(View):
-    # def post(self, request):
-        # querydict = request.POST.dict()
-        # urlpredictor = URLPredictor(
-                        # prediction_api=settings.PREDICTION_API,
-                        # image_url=querydict["im-search"])
-        # print(urlpredictor.predict())
-        # return render(request, "search/index.html")
-
 class SearchView(FormView):
     template_name = "search/index.html"
     form_class = SearchForm
     success_url = '/results'
 
     def form_valid(self, form):
-        print(form.cleaned_data);
+        # the form predict values should be added to context and passed to the result rendering view
+        form.predict()
         return super().form_valid(form)

@@ -82,28 +82,6 @@ class RequestHandler:
         self.data = self.ret_val.data
         # image location
         self.image_location = str(FS.SEARCH_CACHE + "/{0}.{1}").format(image_name, self.ext)
-    
-    @property
-    def is_image(self):
-        """Is resource at link an image
-
-        :rtype: bool
-        """
-        if self.type in IMAGE_TYPES.keys():
-            return True
-        else:
-            return False
-
-    @property
-    def ext(self):
-        """ extension of the image
-
-        :returns: extension of the image
-        :rtype: str
-        """
-        for i in IMAGE_TYPES.values():
-            if self.type.endswith(i):
-                return i
 
     def save(self):
         """Save the image
