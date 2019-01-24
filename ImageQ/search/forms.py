@@ -2,7 +2,7 @@ from django import forms
 
 class SearchForm(forms.Form):
     image = forms.ImageField()
-    url = forms.URLField()
+    url = forms.URLField(widget=forms.TextInput(attrs={placeholder:"Enter a url to an Image"})
 
     def clean_image(self):
         "validate uploaded image"
