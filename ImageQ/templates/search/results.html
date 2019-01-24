@@ -3,8 +3,8 @@
 {% load beautify %}
 
 {% block content %}
-    <main class="container-fluid d-flex flex-grow-1 flex-column align-items-center">
-      <img src="{{ prediction.image.url }}" alt="Uploaded Image" id="imageq-upload" >
+    <main class="container-fluid d-flex flex-grow-1 flex-column align-items-center py-5">
+      <img src="{{ prediction.image.url }}" alt="Uploaded Image" height="500px" width="500px" id="imageq-upload" >
       {{ prediction.predictions }}
       {{ prediction.date_added }}
     </main>

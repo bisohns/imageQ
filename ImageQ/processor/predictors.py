@@ -49,7 +49,7 @@ class URLPredictor(BasePredictor):
         :returns: path of the image
         :rtype: str
         """
-        return os.path.join(settings.BASE_DIR, self.image.path)
+        return self.image.path
 
 
 class UploadPredictor(BasePredictor):

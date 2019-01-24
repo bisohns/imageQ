@@ -1,5 +1,6 @@
-from django import forms
+import json
 import http.client
+from django import forms
 from django.conf import settings
 from urllib.parse import urlparse
 from ImageQ.processor.predictors import URLPredictor, RequestHandler
@@ -65,8 +66,7 @@ class SearchForm(forms.Form):
             try: 
                 req = RequestHandler(image_data)
             except Exception as e:
-                print(e)
-                print("something just happened right now ")
+                raise(e)
             else:
                 # Get the Downloaded Image Model for prediction
                 prediction_model = req.save()
@@ -75,8 +75,9 @@ class SearchForm(forms.Form):
                                prediction_api=settings.PREDICTION_API,
                                image=prediction_model.image)
                 # Store the decoded JSON Predictions
-                _predictions = bytes.decode(urlpredctor.predict())
-                prediction_model.predictions = _predictions_
+                _predictions = json.loads(bytes.decode(urlpredictor.predict()))
+                prediction_model.predictions = _predictions
                 prediction_model.save()
+                prediction = prediction_model
         return prediction
         
