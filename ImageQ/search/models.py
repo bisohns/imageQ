@@ -6,8 +6,8 @@ class Prediction(models.Model):
     The stored data can the be furthere used to make further optimizations
     """
     
-    image = models.ImageField(upload_to='images/')
-    predictions = JSONField()
-    errors = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    predictions = JSONField(null=True, blank=True)
+    errors = models.CharField(max_length=255, null=True, blank=True)
     date_stored = models.DateTimeField(auto_now_add=True)
 

@@ -79,7 +79,7 @@ class RequestHandler:
         if response.status_code != requests.codes.ok:
             return Exception("Something just happened Right Now")
         self.fp = BytesIO()
-        self.fp.write(resp.content)
+        self.fp.write(response.content)
 
     def save(self):
         """Save the image in the Prediction Model
@@ -88,6 +88,6 @@ class RequestHandler:
         image_name = uuid.uuid1().hex
         prediction = Prediction()
         # Save the Image without Downloading it
-        prediction.image.save(f'{image_name}.{self.image.ext}', file.File(self.fp))
+        prediction.image.save(f'{image_name}.{self.image.get("ext")}', files.File(self.fp))
         return prediction
 

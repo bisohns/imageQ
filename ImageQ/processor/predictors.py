@@ -40,7 +40,7 @@ class URLPredictor(BasePredictor):
         """ Constructor method
         """
         self.prediction_api = prediction_api
-        self.image = image.image
+        self.image = image
 
     @property
     def image_path(self):

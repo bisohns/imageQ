@@ -26,18 +26,22 @@ class SearchForm(forms.Form):
         """ Verifies that a url contains image data"""
         parse_url = urlparse(url)
         # Establish connection to the Image Resource
-        conn = http.client.HTTPConnection(parse_url.netloc)
-        conn.request("HEAD", parse_url.path)
-        res = conn.getresponse()
-        for e in res.getheaders():
-            if e[0] == 'Content-Type':
-                if e[1].split('/')[0] == 'image':
-                    self.image_type = e[1].split('/')[1]
-                    return True
-            # For Redirects and shortened URLS
-            if e[0] == 'location':
-                self.validate_url_resource(e[1])
-                break
+        try:
+            conn = http.client.HTTPConnection(parse_url.netloc)
+            conn.request("HEAD", parse_url.path)
+            res = conn.getresponse()
+        except:
+            raise forms.ValidationError('Could not verify Image Resource')
+        else:
+            for e in res.getheaders():
+                if e[0] == 'Content-Type':
+                    if e[1].split('/')[0] == 'image':
+                        self.image_type = e[1].split('/')[1]
+                        return True
+                # For Redirects and shortened URLS
+                if e[0] == 'location':
+                    self.validate_url_resource(e[1])
+                    break
         return
 
     def clean(self):
@@ -60,7 +64,8 @@ class SearchForm(forms.Form):
             # Downloads the Image
             try: 
                 req = RequestHandler(image_data)
-            except:
+            except Exception as e:
+                print(e)
                 print("something just happened right now ")
             else:
                 # Get the Downloaded Image Model for prediction
@@ -68,7 +73,7 @@ class SearchForm(forms.Form):
                 # Predicts the IMage and stores data in database
                 urlpredictor = URLPredictor(
                                prediction_api=settings.PREDICTION_API,
-                               image=_image)
+                               image=prediction_model.image)
                 # Store the decoded JSON Predictions
                 _predictions = bytes.decode(urlpredctor.predict())
                 prediction_model.predictions = _predictions_

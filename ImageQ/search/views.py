@@ -14,7 +14,9 @@ class SearchView(FormView):
 
     def form_valid(self, form):
         prediction = form.predict()
-        return reverse('results', args=(prediction.id, ))
+        if not prediction:
+            return HttpResponse('Something Just happened right now')
+        return reverse('search:results', args=(prediction.id, ))
 
 
 class ResultView(generic.DetailView):
