@@ -29,6 +29,10 @@ class URLPredictor(BasePredictor):
     :type prediction_api: str
     :param image_url: url to the image to be predicted
     :type image_url: str
+
+    Example:
+        >>> predictor = URLPredictor(prediction_api="https://imageqapi.appspot.com/predict", image_url="https://example_image.com/image-jpg")
+        >>> predictor.predict()
     """
     def __init__(self, prediction_api, image_url):
         """Constructor method

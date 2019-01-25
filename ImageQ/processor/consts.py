@@ -34,15 +34,14 @@ class File(object):
 
         Args:
             path (str): Directory/directories to be created.
-            verbose (bool, optional): Defaults to 0. 0 turns of logging,
+            verbose (bool, optional): Defaults to 0. 0 turns of logging, /
                 while 1 gives feedback on creation of director(y|ies).
 
         Example:
-            ```python
             >>> path = os.path.join("path/to", "be/created/")
             >>> File.make_dirs(path, verbose=1)
             INFO  |  "path/to/be/created/" has been created.
-            ```
+
         """
 
         # if director(y|ies) doesn't already exist.
@@ -60,18 +59,19 @@ class File(object):
 
         Args:
             path (str): Base directory of directories to retrieve.
-            exclude (Iterable[str], optional): Defaults to None. List of paths to
-                remove from results.
-            optimize (bool, optional): Defaults to False. Return an generator object,
-                to prevent loading all directories in memory, otherwise: return results
-                as a normal list.
+            exclude (Iterable[str], optional): Defaults to None. List of paths to /
+                remove from results
+            optimize (bool, optional): Defaults to False. Return an generator object, /
+                to prevent loading all directories in memory, otherwise: return results /
+                as a normal list
 
         Raises:
-            FileNotFoundError: `path` was not found.
+            FileNotFoundError: `path` was not found
 
         Returns:
-            Union[Generator[str], List[str]]: Generator expression if optimization is turned on,
-                otherwise list of directories in given path.
+            Union[Generator[str], List[str]]: Generator expression if optimization is turned on, /
+                otherwise list of directories in given path
+
         """
         # Return only list of directories.
         return File.listdir(path, exclude=exclude, dirs_only=True, optimize=optimize)
@@ -82,18 +82,19 @@ class File(object):
 
         Args:
             path (str): Base directory of files to retrieve.
-            exclude (Iterable[str], optional): Defaults to None. List of paths to
+            exclude (Iterable[str], optional): Defaults to None. List of paths to /
                 remove from results.
-            optimize (bool, optional): Defaults to False. Return an generator object,
-                to prevent loading all directories in memory, otherwise: return results
+            optimize (bool, optional): Defaults to False. Return an generator object, /
+                to prevent loading all directories in memory, otherwise: return results /
                 as a normal list.
 
         Raises:
             FileNotFoundError: `path` was not found.
 
         Returns:
-            Union[Generator[str], List[str]]: Generator expression if optimization is turned on,
+            Union[Generator[str], List[str]]: Generator expression if optimization is turned on, /
                 otherwise list of files in given path.
+
         """
         # Return only list of directories.
         return File.listdir(path, exclude=exclude, files_only=True, optimize=optimize)
@@ -102,24 +103,25 @@ class File(object):
     def listdir(path: str, exclude= None,
                 dirs_only: bool = False, files_only: bool = False,
                 optimize: bool = False):
-        """Retrieve files/directories in a given path.
+        r"""Retrieve files/directories in a given path.
 
         Args:
             path (str): Base directory of path to retrieve.
-            exclude (Iterable[str], optional): Defaults to None. List of paths to
+            exclude (Iterable[str], optional): Defaults to None. List of paths to /
                 remove from results.
             dirs_only (bool, optional): Defaults to False. Return only directories in `path`.
             files_only (bool, optional): Defaults to False. Return only files in `path`.
-            optimize (bool, optional): Defaults to False. Return an generator object,
-                to prevent loading all directories in memory, otherwise: return results
+            optimize (bool, optional): Defaults to False. Return an generator object, /
+                to prevent loading all directories in memory, otherwise: return results /
                 as a normal list.
 
         Raises:
             FileNotFoundError: `path` was not found.
 
         Returns:
-            Union[Generator[str], List[str]]: Generator expression if optimization is turned on,
+            Union[Generator[str], List[str]]: Generator expression if optimization is turned on, /
                 otherwise list of directories in given path.
+
         """
         if not os.path.isdir(path):
             raise FileNotFoundError('"{}" was not found!'.format(path))

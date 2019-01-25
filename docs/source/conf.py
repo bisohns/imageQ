@@ -20,13 +20,13 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'ImageQ'
-copyright = '2018, Diretnan Domnan, Manasseh Mmadu'
-author = 'Diretnan Domnan, Manasseh Mmadu'
+copyright = '2019, Diretnan Domnan, Mmadu Manasseh'
+author = 'Diretnan Domnan, Mmadu Manasseh'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1.0.1'
+release = ''
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,7 +42,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
 ]
 
@@ -134,7 +133,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'ImageQ.tex', 'ImageQ Documentation',
-     'Diretnan Domnan, Manasseh Mmadu', 'manual'),
+     'Diretnan Domnan, Mmadu Manasseh', 'manual'),
 ]
 
 

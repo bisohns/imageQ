@@ -8,18 +8,6 @@ Subpackages
 
     ImageQ.flask.flask_api
 
-Submodules
-----------
-
-ImageQ.flask.setup module
--------------------------
-
-.. automodule:: ImageQ.flask.setup
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
 Module contents
 ---------------
 
