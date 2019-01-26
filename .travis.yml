@@ -4,14 +4,6 @@ sudo: required
 python:
   - "3.6"
 
-addons:
-  sonarcloud:
-    # create sonar connection for code health analysis
-    organization: "deven96-github" 
-    token:
-      secure: $SONAR_TOKEN
-
-
 # Branches to enbale CI.
 branches:
   only:
@@ -25,7 +17,6 @@ deploy:
   app: $HEROKU_APP_NAME
 
 after_sucess: 
-- sonar-scanner
 # build docs on github pages
 - ./docs.sh
 
