@@ -9,6 +9,7 @@ Image search engine powered by Django
   - [Getting Started](#getting-started)
     - [Installation](#installation)
   - [Running Locally](#running-locally)
+  - [Prediction API](#prediction-api)
   - [Deploy](#deploy)
   - [Code Documentation](#code-documentation)
   - [Code Structure](#code-structure)
@@ -68,6 +69,10 @@ To view the API locally on port 9000
 ```bash
     python manage.py runserver 9000
 ```
+
+## Prediction API
+
+The prediction API code can be found at the [repo](https://github.com/deven96/ImageQ_API)
 
 ## Deploy
 
