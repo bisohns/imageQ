@@ -78,3 +78,5 @@ virtualenv-clone==0.4.0
 Werkzeug==0.14.1
 whitenoise==4.1.2
 wrapt==1.11.1
+beautifulsoup4
+lxml
