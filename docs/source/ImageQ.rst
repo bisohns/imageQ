@@ -6,7 +6,6 @@ Subpackages
 
 .. toctree::
 
-    ImageQ.flask
     ImageQ.processor
     ImageQ.search
     ImageQ.settings

@@ -12,6 +12,14 @@ ImageQ.settings.common module
     :undoc-members:
     :show-inheritance:
 
+ImageQ.settings.local\_settings module
+--------------------------------------
+
+.. automodule:: ImageQ.settings.local_settings
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ImageQ.settings.production module
 ---------------------------------
 

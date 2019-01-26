@@ -1,3 +1,0 @@
-[submodule "ImageQ/flask"]
-	path = ImageQ/flask
-	url = git@github.com:deven96/ImageQ_API.git

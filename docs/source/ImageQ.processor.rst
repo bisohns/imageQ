@@ -28,6 +28,14 @@ ImageQ.processor.predictors module
     :undoc-members:
     :show-inheritance:
 
+ImageQ.processor.search module
+------------------------------
+
+.. automodule:: ImageQ.processor.search
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

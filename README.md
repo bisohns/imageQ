@@ -2,7 +2,7 @@
 
 Image search engine powered by Django
 
-[![Build Status](https://travis-ci.org/deven96/ImageQ.svg?branch=master)](https://travis-ci.com/deven96/ImageQ)![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=deven96_ImageQ&metric=alert_status)
+[![Build Status](https://travis-ci.com/bisoncorps/imageQ.svg?branch=master)](https://travis-ci.com/bisoncorps/imageQ)![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=deven96_ImageQ&metric=alert_status)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 - [ImageQ](#imageq)
@@ -10,7 +10,7 @@ Image search engine powered by Django
     - [Installation](#installation)
   - [Running Locally](#running-locally)
   - [Deploy](#deploy)
-  - [Documentation](#documentation)
+  - [Code Documentation](#code-documentation)
   - [Code Structure](#code-structure)
   - [Todo](#todo)
 
@@ -20,9 +20,9 @@ Clone the repo
 
 ```bash
     # SSH
-    git clone git@github.com:deven96/ImageQ.git
+    git clone git@github.com:bisoncorps/imageQ.git
     # HTTPS
-    git clone https://github.com/deven96/ImageQ.git
+    git clone https://github.com/bisoncorps/imageQ.git
 ```
 
 Activate virtual environment. All project work should be done in virtualenvs and virtualenv names must be added to gitignore
@@ -71,11 +71,11 @@ To view the API locally on port 9000
 
 ## Deploy
 
-The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com) and it sends requests to the deployed [prediction API](https://devenmap-217623.appspot.com/predict)
+The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com) and it sends requests to the deployed [prediction API](https://imageqapi.appspot.com/)
 
-## Documentation
+## Code Documentation
 
-Documentation is available on [Github Pages](https://deven96.github.io/ImageQ)
+Code Documentation is available on [Github Pages](https://bisoncorps.github.io/imageQ)
 
 ## Code Structure
 

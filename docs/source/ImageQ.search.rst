@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
 
     ImageQ.search.migrations
+    ImageQ.search.templatetags
 
 Submodules
 ----------
@@ -23,6 +24,14 @@ ImageQ.search.apps module
 -------------------------
 
 .. automodule:: ImageQ.search.apps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ImageQ.search.forms module
+--------------------------
+
+.. automodule:: ImageQ.search.forms
     :members:
     :undoc-members:
     :show-inheritance:
