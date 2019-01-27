@@ -6,7 +6,7 @@
     <main class="container-fluid d-flex flex-grow-1 flex-column align-items-center py-5">
       <div class="jumbotron">
       <a href="/">
-        <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
+        <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" class="img-fluid">
       </a>
       <div class="row">
         
@@ -39,7 +39,7 @@
           <div class ="row flex-row">
             <div class="col-12 flex-row"><b>Search Image</b></div>
             <div class="col-12 flex-row">
-            <img src="{{ image_url }}" alt="Uploaded Image" height="200px" width="200px" id="imageq-upload" class="rounded-circle" >
+            <img src="{{ image_url }}" class="img-fluid" alt="Uploaded Image" height="200px" width="200px" id="imageq-upload" class="rounded-circle" >
             </div>
             <div class="container-fluid">
               <div class="bg-success">
