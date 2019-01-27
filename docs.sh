@@ -19,3 +19,4 @@ rm -r ./docs
 git add .
 git commit -am "rebuilt docs"
 git push -q https://${GITHUB_TOKEN}@github.com/bisoncorps/imageQ.git gh-pages --force
+echo "at end of docbuilder script"
