@@ -10,6 +10,13 @@ from urllib.parse import urlparse
 from ImageQ.processor.search import Search
 
 
+def handler404(request, template_name="404.html"):
+    """
+    Default 404 handler
+    """
+    data = {}
+    return render(request, template_name, data)
+
 
 class SearchView(FormView):
     template_name = "search/index.html"

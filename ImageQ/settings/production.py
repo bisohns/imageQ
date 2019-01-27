@@ -1,6 +1,9 @@
 from .common import *
 import dj_database_url 
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
 #email backend and vars
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"

@@ -23,6 +23,7 @@ from ImageQ.search.views import *
 
 app_name = "search"
 
+
 urlpatterns = [
     path('', SearchView.as_view(), name="search_index"),
     path('results/<int:pk>', ResultView.as_view(), name="results"),
