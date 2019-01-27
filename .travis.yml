@@ -10,11 +10,7 @@ branches:
     - master
 
 script: python tests.py
-after_sucess: 
-# build docs on github pages
-- ./docs.sh
-
-after_sucess: 
+after_script: 
 # build docs on github pages
 - ./docs.sh
 
