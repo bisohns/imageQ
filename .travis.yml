@@ -9,9 +9,6 @@ branches:
   only:
     - master
 
-install:
-  - pip install -r requirements.txt
-
 deploy:
   provider: heroku
   api_key: $HEROKU_PRODUCTION_API_KEY
