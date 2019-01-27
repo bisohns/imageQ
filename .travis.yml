@@ -12,9 +12,6 @@ branches:
 install:
   - pip install -r requirements.txt
 
-script:
-  - python tests.py 
-
 deploy:
   provider: heroku
   api_key: $HEROKU_PRODUCTION_API_KEY
