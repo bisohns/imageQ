@@ -11,14 +11,15 @@ branches:
 
 script: python manage.py
 
+after_sucess: 
+# build docs on github pages
+- ./docs.sh
+
 deploy:
   provider: heroku
   api_key: $HEROKU_PRODUCTION_API_KEY
   app: $HEROKU_APP_NAME
 
-after_sucess: 
-# build docs on github pages
-- ./docs.sh
 
 notifications:
 # slack channel notification
