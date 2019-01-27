@@ -19,6 +19,7 @@
  """
 
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse
 
 
 class Search(object):
@@ -35,7 +36,7 @@ class Search(object):
         :type query: string
         :param page: Page to be displayed.
         :type page: int
-        :return: dictionary. Containing titles, links and descriptions.
+        :return: dictionary. Containing titles, links, netlocs and descriptions.
         """
         # replace spaces in query string
         query = query.replace(" ", "%20")
@@ -46,18 +47,22 @@ class Search(object):
         each_result = soup.find_all('div', class_='g')
         titles = []
         links = []
+        netlocs = []
         descs = []
         for each in each_result:
             try:
                 title, link, desc = Search.parse_results(each)
+                parsed_url = urlparse(link)
                 ''' Append links and text to a list '''
                 titles.append(title)
                 links.append(link)
+                netlocs.append(parsed_url.netloc)
                 descs.append(desc)
             except Exception as e:
                 print(e)
         search_results = {'titles': titles,
                           'links': links,
+                          'netlocs': netlocs,
                           'descriptions': descs}
         return search_results
 

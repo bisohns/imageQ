@@ -13,9 +13,13 @@
             {% for i in range %}
               <div class="row">
                 <div class="col-11">
-                  <h4 class="search-title" href=>{% get_item search_results "titles" i %}</h4>
+                  <h4 class="search-title">
+                  <a href="{{ search_results|get_href:i }}">
+                      {% get_item search_results "titles" i %}
+                  </a>
+                  </h4>
                 </div>
-                <div class="search-link col-11">{% get_item search_results "links" i %}</div>
+                <div class="search-link col-11">https://{% get_item search_results "netlocs" i %}</div>
                 <div class="search-description col-11">
                   <p>
                   {% get_item search_results "descriptions" i %}

@@ -6,6 +6,7 @@ from django.views.generic.edit import FormView
 from .forms import SearchForm
 from .models import Prediction
 from django.views import View
+from urllib.parse import urlparse
 from ImageQ.processor.search import Search
 
 
@@ -25,12 +26,13 @@ class SearchView(FormView):
 class ResultView(View):
     template_name = "search/results.html"
 
-    def get(self, request, pk, top=0):
+    def get(self, request, pk):
         """ Render results """
         prediction = Prediction.objects.get(pk=pk)
         image_url = prediction.image.url
         date_stored = prediction.date_stored
-        top_prediction = prediction.predictions["predictions"][top]
+        top_prediction = prediction.predictions["predictions"][0]
+        other_predictions = prediction.predictions["predictions"][1:]
         probability = top_prediction["probability"]
         search_term = top_prediction["label"].replace("_", " ")
         try:
@@ -42,6 +44,7 @@ class ResultView(View):
                                 "search_term": search_term,
                                 "range": range(len(search_results["titles"])),
                                 "search_results": search_results,
+                                "other_predictions": other_predictions,
                                 "date_stored": date_stored,
                                 "probability": probability,
                                 })
@@ -50,6 +53,7 @@ class ResultView(View):
             return render(request, self.template_name, {'image_url': image_url, 
                                 "search_success": search_sucess,
                                 "search_term": search_term,
+                                "other_predictions": other_predictions,
                                 "date_stored": date_stored,
                                 "probability": probability,
                                 })
