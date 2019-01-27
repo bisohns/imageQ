@@ -9,7 +9,7 @@ branches:
   only:
     - master
 
-script: python manage.py
+script: python tests.py
 
 after_sucess: 
 # build docs on github pages
