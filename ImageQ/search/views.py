@@ -25,6 +25,8 @@ class SearchView(FormView):
 
 class ResultView(View):
     template_name = "search/results.html"
+    google_search_handler = Search()
+
 
     @staticmethod
     def select_prediction(prediction_list, select_index):
@@ -46,12 +48,12 @@ class ResultView(View):
             top_prediction = prediction_list[select_index]
             for i in range(len(prediction_list)):
                 if i != select_index:
+                    prediction_list[i]["index"] = i
                     other_predictions.append(prediction_list[i])
             return top_prediction, other_predictions
 
 
-    @staticmethod
-    def search(search_term):
+    def search(self, search_term):
         """
         Utilize search parser to scrape google for results
 
@@ -60,8 +62,7 @@ class ResultView(View):
         :return: dictionary [titles, links, netlocs and descriptions] and sucess value
         :rtype: dict, bool
         """
-        google_search_handler = Search()
-        search_results = google_search_handler.search(search_term, 1)
+        search_results = self.google_search_handler.search(search_term, 1)
         search_success = True
         return search_results, search_success
 
@@ -84,24 +85,32 @@ class ResultView(View):
                         select_index=select_index)
         probability = top_prediction["probability"]
         search_term = top_prediction["label"].replace("_", " ")
+        main_args = {
+                    "image_url": image_url, 
+                    "pk": pk,
+                    "search_term": search_term,
+                    "other_predictions": other_predictions,
+                    "other_predictions_range": range(len(other_predictions)),
+                    "select_index": select_index,
+                    "date_stored": date_stored,
+                    "probability": probability,
+                    }
         try:
-            search_results, search_success = ResultView.search(search_term)
-            return render(request, self.template_name, {'image_url': image_url, 
-                                "search_success": search_success,
-                                "search_term": search_term,
+            print(search_term)
+            search_results, search_success = self.search(search_term)
+            return render(request, self.template_name, {
+                                **main_args,
                                 "range": range(len(search_results["titles"])),
-                                "search_results": search_results,
-                                "other_predictions": other_predictions,
-                                "date_stored": date_stored,
-                                "probability": probability,
-                                })
-        except:
-            search_success = False
-            return render(request, self.template_name, {'image_url': image_url, 
                                 "search_success": search_success,
-                                "search_term": search_term,
-                                "other_predictions": other_predictions,
-                                "date_stored": date_stored,
-                                "probability": probability,
+                                "search_results": search_results,
+                                })
+        except Exception as e:
+            search_success = False
+            error = e
+            print(search_success)
+            return render(request, self.template_name, {
+                                **main_args,
+                                "search_success": search_success,
+                                "error": error
                                 })
 

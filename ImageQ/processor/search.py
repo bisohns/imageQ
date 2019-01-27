@@ -44,19 +44,22 @@ class Search(object):
         html = Search.getSource(self.googleSearchURL)
         soup = BeautifulSoup(html, 'lxml')
         # # find all class_='g' => each result
-        each_result = soup.find_all('div', class_='g')
+        results = soup.find_all('div', class_='g')
+        if not results:
+            raise ValueError("The result parsing was unsuccessful, flagged as unusual traffic")
         titles = []
         links = []
         netlocs = []
         descs = []
-        for each in each_result:
+        for each in results:
+            title=link=desc=netloc = " "
             try:
                 title, link, desc = Search.parse_results(each)
-                parsed_url = urlparse(link)
+                netloc = urlparse(link).netloc
                 ''' Append links and text to a list '''
                 titles.append(title)
                 links.append(link)
-                netlocs.append(parsed_url.netloc)
+                netlocs.append(netloc)
                 descs.append(desc)
             except Exception as e:
                 print(e)
@@ -99,9 +102,11 @@ class Search(object):
         :return: html source code of a given URL.
         """
         import requests
-
+        # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
+        # prevent caching
+        headers={'Cache-Control': 'no-cache'}
         try:
-            response = requests.get(url)
+            response = requests.get(url, headers=headers)
             html = response.text
         except Exception as e:
             raise Exception('ERROR: {}\n'.format(e))
