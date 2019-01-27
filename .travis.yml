@@ -9,10 +9,14 @@ branches:
   only:
     - master
 
-script: python tests.py
-after_script: 
-# build docs on github pages
-- ./docs.sh
+install:
+  - pip install -r requirements.txt
+
+script:
+  - python tests.py 
+
+after_success:
+  - ./docs.sh
 
 deploy:
   provider: heroku
