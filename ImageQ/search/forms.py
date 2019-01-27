@@ -36,6 +36,7 @@ class SearchForm(forms.Form):
         else:
             for e in res.getheaders():
                 if e[0] == 'Content-Type':
+                    print(e)
                     if e[1].split('/')[0] == 'image':
                         self.image_type = e[1].split('/')[1]
                         return True

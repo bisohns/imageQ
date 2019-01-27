@@ -4,8 +4,47 @@
 
 {% block content %}
     <main class="container-fluid d-flex flex-grow-1 flex-column align-items-center py-5">
-      <img src="{{ prediction.image.url }}" alt="Uploaded Image" height="500px" width="500px" id="imageq-upload" >
-      {{ prediction.predictions }}
-      {{ prediction.date_added }}
+      <div class="container">
+      <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" >
+      <div class="row">
+        
+        <div class="col-md-8">
+          {% if search_success %}
+            {% for i in range %}
+              <div class="row">
+                <div class="col-11">
+                  <h4 class="search-title" href=>{% get_item search_results "titles" i %}</h4>
+                </div>
+                <div class="search-link col-11">{% get_item search_results "links" i %}</div>
+                <div class="search-description col-11">
+                  <p>
+                  {% get_item search_results "descriptions" i %}
+                  </p>
+                </div>
+              </div>
+
+            {% endfor %}
+          {% else %}
+              <h4>Error while searching google, check internet connection</h4>
+          {% endif %}
+        </div>
+
+        <div class="col-md-4 border">
+          <div class ="row flex-row">
+            <div class="col-12 flex-row"><b>Search Image</b></div>
+            <div class="col-12 flex-row">
+            <img src="{{ image_url }}" alt="Uploaded Image" height="200px" width="200px" id="imageq-upload" class="rounded-circle" >
+            </div>
+          </div>
+            Top Prediction: {{ search_term }}<br>
+            Probability: {{ probability }}
+        </div>
+
+
+      </div>
+    </div>
+        
+      
+    Date Stored: {{ date_stored }}
     </main>
 {% endblock %}

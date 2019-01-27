@@ -33,3 +33,21 @@
     font-weight: bold;
   }
 
+  /* RESULT page*/
+
+  .flex-row {
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-title {
+    color: blue;
+  }
+
+  .search-link {
+    color: green;
+  }
+
+  .search-description {
+    color: #696969;
+  }
