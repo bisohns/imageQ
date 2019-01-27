@@ -25,10 +25,6 @@ from urllib.parse import urlparse
 class Search(object):
     """
     """
-
-    def __init__(self):
-        self.googleSearchURL = 'https://www.google.com/search?q={}&start={}'
-
     def search(self, query, page):
         """
         Parses Google for a search query.
@@ -40,8 +36,9 @@ class Search(object):
         """
         # replace spaces in query string
         query = query.replace(" ", "%20")
-        self.googleSearchURL = self.googleSearchURL.format(query, page)
-        html = Search.getSource(self.googleSearchURL)
+        googleSearchURL = 'https://www.google.com/search?q={}&start={}'
+        googleSearchURL = googleSearchURL.format(query, page)
+        html = Search.getSource(googleSearchURL)
         soup = BeautifulSoup(html, 'lxml')
         # # find all class_='g' => each result
         results = soup.find_all('div', class_='g')
@@ -106,6 +103,7 @@ class Search(object):
         # prevent caching
         headers={'Cache-Control': 'no-cache'}
         try:
+            print(url)
             response = requests.get(url, headers=headers)
             html = response.text
         except Exception as e:
