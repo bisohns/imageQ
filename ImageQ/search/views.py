@@ -20,7 +20,7 @@ class SearchView(FormView):
         prediction = form.predict()
         if not prediction:
             return HttpResponse('Something Just happened right now')
-        return redirect(reverse('search:results', args=[prediction.id, ]))
+        return redirect(reverse('search:results', args=[prediction.id, 0]))
 
 
 class ResultView(View):
