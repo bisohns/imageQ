@@ -22,7 +22,7 @@
 import urllib3
 import os
 from django.conf import settings
-from ImageQ.processor.base import BasePredictor, RequestHandler
+from ImageQ.processor.base import BasePredictor, RequestHandler, UploadHandler
 
 class URLPredictor(BasePredictor):
     """This is a URL class predictor for the ResNet model 
@@ -50,13 +50,4 @@ class URLPredictor(BasePredictor):
         :rtype: str
         """
         return self.image.path
-
-
-class UploadPredictor(BasePredictor):
-    """This is an Upload class predictor for the ResNet model 
-
-    :param image_location: url to the image to be predicted
-    :type image_location: str
-    """
-    pass
 

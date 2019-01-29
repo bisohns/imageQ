@@ -60,7 +60,7 @@ class Search(object):
                 netlocs.append(netloc)
                 descs.append(desc)
             except Exception as e:
-                raise Exception("Error parsing results from search engine, refer to developer")
+                print(e)
         search_results = {'titles': titles,
                           'links': links,
                           'netlocs': netlocs,

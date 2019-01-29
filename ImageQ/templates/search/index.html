@@ -26,13 +26,23 @@
       {% endif %}
         {% csrf_token %}
         <div class="form-group">
-          <div class="input-group">
+          <div class="input-group" id="url-div" >
             {{ form.url|add_class:'form-control input-lg' }}
           </div>
+          <div class="input-group" id="upload-div" style="display: none;">
+            {{ form.image }}
+          </div>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Search!</button>
+          </span>
         </div>
         <div class="d-flex flex-row justify-content-end mt-2">
-            <button type="submit" class="btn btn-md mr-4">Image URL</button>
-            <button class="btn btn-md">Upload Image</button>
+            <select id="inputType" onchange="changeField(this)">
+              <option value="url" selected>Image URL
+              </option>
+              <option value="upload">Upload
+              </option>
+            </select>
         </div>
       </form>
     </div>

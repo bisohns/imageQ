@@ -91,3 +91,28 @@ class RequestHandler:
         prediction.image.save(f'{image_name}.{self.image.get("ext")}', files.File(self.fp))
         return prediction
 
+class UploadHandler:
+    """
+    Uploaded Image Handler
+
+    :param image: image to initialize class with
+    :tyoe image: `django.core.files.uploadedfile.InMemoryUploadedFile`
+    """
+    def __init__(self, image):
+        if image:
+            self.image = image
+        else:
+            raise AttributeError(f"cannot init class with image of type {type(image)}")
+        if self.image.content_type.startswith("image/"):
+            self.ext = self.image.content_type[7:]
+        else:
+            raise ValueError("content-type <image/*> expected")
+
+    def save(self):
+        """Save the image in the Prediction Model
+        """
+        image_name = uuid.uuid1().hex
+        prediction = Prediction()
+        # Save the Image without Downloading it
+        prediction.image.save(f'{image_name}.{self.ext}', self.image)
+        return prediction

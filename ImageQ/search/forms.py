@@ -1,13 +1,15 @@
 import json
+import uuid
 import http.client
 from django import forms
 from django.conf import settings
 from urllib.parse import urlparse
-from ImageQ.processor.predictors import URLPredictor, RequestHandler
+from ImageQ.processor.predictors import URLPredictor, RequestHandler, UploadHandler
 from ImageQ.search.models import Prediction
 
 class SearchForm(forms.Form):
     image_type = ""
+    is_multipart = True
     image = forms.ImageField(required=False)
     url = forms.URLField(required=False)
 
@@ -50,9 +52,11 @@ class SearchForm(forms.Form):
         cleaned_data = super().clean()
         image = cleaned_data.get('image')
         url = cleaned_data.get('url')
-
+        
         if not (url or image):
             raise forms.ValidationError("You must provide either an image or a url to an image")
+        if not image.content_type.startswith("image/"):
+            raise forms.ValidationError("Uploaded file not of image type")
         return cleaned_data
 
     def predict(self):
@@ -60,7 +64,7 @@ class SearchForm(forms.Form):
         """
         url = self.cleaned_data.get('url')
         image = self.cleaned_data.get('image')
-        if url: 
+        if url:
             image_data = { "url": url, "ext": self.image_type }
             prediction = None
             # Downloads the Image
@@ -71,14 +75,19 @@ class SearchForm(forms.Form):
             else:
                 # Get the Downloaded Image Model for prediction
                 prediction_model = req.save()
-                # Predicts the IMage and stores data in database
-                urlpredictor = URLPredictor(
-                               prediction_api=settings.PREDICTION_API,
-                               image=prediction_model.image)
-                # Store the decoded JSON Predictions
-                _predictions = json.loads(bytes.decode(urlpredictor.predict()))
-                prediction_model.predictions = _predictions
-                prediction_model.save()
-                prediction = prediction_model
+        else:
+            # Save the Image uploaded image
+            req = UploadHandler(image)
+            prediction_model = req.save()
+            # prediction_model.image.save(image_data)
+        # Predicts the IMage and stores data in database
+        urlpredictor = URLPredictor(
+                        prediction_api=settings.PREDICTION_API,
+                        image=prediction_model.image)
+        # Store the decoded JSON Predictions
+        _predictions = json.loads(bytes.decode(urlpredictor.predict()))
+        prediction_model.predictions = _predictions
+        prediction_model.save()
+        prediction = prediction_model
         return prediction
         
