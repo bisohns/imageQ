@@ -28,6 +28,7 @@ class Search(object):
     def search(self, query, page):
         """
         Parses Google for a search query.
+
         :param query: Search query sentence or term
         :type query: string
         :param page: Page to be displayed.
@@ -59,7 +60,7 @@ class Search(object):
                 netlocs.append(netloc)
                 descs.append(desc)
             except Exception as e:
-                print(e)
+                raise Exception("Error parsing results from search engine, refer to developer")
         search_results = {'titles': titles,
                           'links': links,
                           'netlocs': netlocs,
@@ -94,6 +95,7 @@ class Search(object):
     def getSource(url):
         """
         Returns the source code of a webpage.
+
         :rtype: string
         :param url: URL to pull it's source code
         :return: html source code of a given URL.
