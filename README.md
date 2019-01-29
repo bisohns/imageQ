@@ -99,3 +99,4 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 - Beautify ImageQ query page
 - Create protocol for incorrect classifications
+- Fix media issue on heroku (image search)
