@@ -35,30 +35,27 @@
           {% endif %}
         </div>
 
-        <div class="col-md-4">
-          <div class ="row flex-row">
-            <div class="col-12 flex-row"><b>Search Image</b></div>
-            <div class="col-12 flex-row">
-            <img src="{{ image_url }}" alt="Uploaded Image" height="200px" width="200px" id="imageq-upload" class="rounded-circle" >
-            </div>
-            <div class="container-fluid">
+        <div class="col-md-4 d-flex flex-column ">
+          <div><b>Search Image</b></div>
+            <img src="{{ image_url }}" alt="Uploaded Image" height="200px" width="200px" id="imageq-upload" class="rounded align-self-center" >
+            <div class="container mt-2">
               <div class="bg-success">
-                  <a href="/results/{{ pk }}/{{ select_index }}" class="text-white">
+                <a href="{% url 'search:results' pk select_index %}" class="text-white">
                     Prediction: {{ search_term }}<br>
                     Probability: {{ probability }}<br>
                     </a>
               </div>
               {% for i in other_predictions_range %}
-              <div class="bg-secondary">
-                  <a href="/results/{{ pk }}/{{ other_predictions|get_index:i }}" class="text-white">
+              <div class="bg-secondary mt-2">
+                <a href="{% url 'search:results' pk other_predictions|get_index:i %}" class="text-white">
                     Prediction: {% get_pred_item other_predictions i "label" %}<br>
                     Probability: {% get_pred_item other_predictions i "probability" %}<br>
                     </a>
               </div>
               {% endfor %}
             </div>
+            <p><a href='{% url 'search:index' %}'>Search Again</a></p>
 
-      </div>
     </div>
   </div>
         
