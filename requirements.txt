@@ -58,10 +58,13 @@ Pygments==2.3.1
 pylint==2.2.2
 pyparsing==2.3.1
 pytest==3.7.1
+python-http-client==3.1.0
 pytz==2018.5
 PyYAML==3.13
 requests==2.21.0
 scipy==1.2.0
+sendgrid==3.6.5
+sendgrid-django==4.2.0
 six==1.11.0
 snowballstemmer==1.2.1
 soupsieve==1.7.3
@@ -82,8 +85,3 @@ virtualenv-clone==0.4.0
 Werkzeug==0.14.1
 whitenoise==4.1.2
 wrapt==1.11.1
-beautifulsoup4
-lxml
-sphinx-rtd-theme
-sendgrid
-sendgrid-django
