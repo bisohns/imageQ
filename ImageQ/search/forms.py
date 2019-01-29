@@ -55,8 +55,9 @@ class SearchForm(forms.Form):
         
         if not (url or image):
             raise forms.ValidationError("You must provide either an image or a url to an image")
-        if not image.content_type.startswith("image/"):
-            raise forms.ValidationError("Uploaded file not of image type")
+        if image:
+            if not image.content_type.startswith("image/"):
+                raise forms.ValidationError("Uploaded file not of image type")
         return cleaned_data
 
     def predict(self):
@@ -75,7 +76,7 @@ class SearchForm(forms.Form):
             else:
                 # Get the Downloaded Image Model for prediction
                 prediction_model = req.save()
-        else:
+        if image:
             # Save the Image uploaded image
             req = UploadHandler(image)
             prediction_model = req.save()
