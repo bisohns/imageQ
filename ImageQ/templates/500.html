@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+  <div class="pl-5">
+    <img src="{% static 'images/rsz_imageq_trans.png' %}" alt="ImageQ Logo" id="imageq-logo" class="img-fluid">
+  </div>
   <div class="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
     <h1>Internal Server Error</h1>
     <h4>Contact Administrator</h4>
