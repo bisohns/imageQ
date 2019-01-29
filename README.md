@@ -97,6 +97,7 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 ## Todo
 
+- Change deployment of static/media files to nginx/apache_mod or on AWS S3 bucket
 - Integrate Search query over google, yahoo, duck duck go etc. and Allow switching between them
 - Beautify ImageQ query page
 - Create protocol for incorrect classifications
