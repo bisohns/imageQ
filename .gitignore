@@ -139,5 +139,5 @@ local_vars.yml
 *.swp
 *.swo
 
-# media files
-media/*
+# # media files
+# media/*
