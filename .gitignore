@@ -106,8 +106,6 @@ venv.bak/
 /static
 .mypy_cache/
 
-# media file
-media/
 
 tmp/*
 # pip build dir
