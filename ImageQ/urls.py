@@ -23,5 +23,6 @@ from ImageQ.search.views import handler404
 handler404 = handler404
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include('ImageQ.search.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,9 +1,8 @@
 from .common import *
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#email backend and vars
+# email backend and vars
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL = "support@ImageQ"
 

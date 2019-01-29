@@ -56,6 +56,7 @@ coverage.xml
 ImageQ/media
 *.log
 *.sqlite3
+ImageQ/staticfiles
 
 # Flask stuff:
 instance/
