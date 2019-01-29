@@ -11,6 +11,7 @@ Image search engine powered by Django
   - [Running Locally](#running-locally)
   - [Prediction API](#prediction-api)
   - [Deploy](#deploy)
+  - [Example](#example)
   - [Code Documentation](#code-documentation)
   - [Code Structure](#code-structure)
   - [Todo](#todo)
@@ -76,7 +77,13 @@ The prediction API code can be found at the [repo](https://github.com/deven96/Im
 
 ## Deploy
 
-The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com) and it sends requests to the deployed [prediction API](https://imageqapi.appspot.com/)
+The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com)
+![Homepage](docs/assets/homepage.png)
+ and it sends requests to the deployed [prediction API](https://imageqapi.appspot.com/)
+
+## Example
+
+![Example-Result](docs/assets/result.png)
 
 ## Code Documentation
 
