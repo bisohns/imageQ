@@ -97,5 +97,9 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 ## Todo
 
+- Integrate Search query over google, yahoo, duck duck go etc. and Allow switching between them
 - Beautify ImageQ query page
 - Create protocol for incorrect classifications
+- Add upload image functionality
+- Receive top predictions from API and display in google-like format
+- Incorporate bootstrap locally? 
