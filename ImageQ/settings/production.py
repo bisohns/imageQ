@@ -14,7 +14,7 @@ DEBUG = False
 
 #heroku database
 DATABASES = {
-    'default': dj_database_url.parse('postgres://xguujvquxmfkkg:7bc9370d3a554fdc096675e99aafb77a95e0bf1a2cde6e4c14e9e3019361171d@ec2-54-247-125-116.eu-west-1.compute.amazonaws.com:5432/d6iei61f1ie5lg')
+    'default': dj_database_url.parse('postgres://rltwwwpyvwzzlt:e3165ba253100fcb66c589901607b44bd8d81404ea400191333c85bbec952a63@ec2-54-75-230-41.eu-west-1.compute.amazonaws.com:5432/d31k5vbdupfdvg')
 }
 
 PREDICTION_API = "https://imageqapi.appspot.com/predict"

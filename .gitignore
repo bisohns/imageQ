@@ -138,3 +138,6 @@ tags
 local_vars.yml
 *.swp
 *.swo
+
+# media files
+media/*
