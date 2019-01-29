@@ -76,3 +76,4 @@ beautifulsoup4
 lxml
 sphinx-rtd-theme
 sendgrid
+sendgrid-django
