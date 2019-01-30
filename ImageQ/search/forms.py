@@ -11,7 +11,8 @@ from ImageQ.search.models import Prediction
 class SearchForm(forms.Form):
     engine_choices = (
         ("Google", "Google"),
-        ("Yahoo", "Yahoo")
+        ("Yahoo", "Yahoo"),
+        ("Bing", "Bing"),
     )
     image_type = ""
     is_multipart = True
