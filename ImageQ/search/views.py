@@ -7,7 +7,7 @@ from .forms import SearchForm
 from .models import Prediction
 from django.views import View
 from urllib.parse import urlparse
-from ImageQ.processor.search import GoogleSearch, YahooSearch
+from ImageQ.processor.search import GoogleSearch, YahooSearch, BingSearch
 
 
 class SearchView(FormView):
@@ -80,8 +80,10 @@ class ResultView(View):
         """
         if engine=="Google":
             self.search_handler = GoogleSearch()
-        if engine=="Google":
+        if engine=="Yahoo":
             self.search_handler = YahooSearch()
+        if engine=="Bing":
+            self.search_handler = BingSearch()
 
         prediction = Prediction.objects.get(pk=pk)
         image_url = prediction.image.url

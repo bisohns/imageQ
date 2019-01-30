@@ -161,5 +161,7 @@ IMAGE_TYPES = {
 
 SEARCH_QUERY = {
     "Google": 'https://www.google.com/search?q={}&start={}',
-    "Yahoo": 'https://search.yahoo.com/search?p={}&b={}'
+    "Yahoo": 'https://search.yahoo.com/search?p={}&b={}',
+    "Bing": 'https://www.bing.com/search?q={}&count=10&offset=0&first={}',
+
 }

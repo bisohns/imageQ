@@ -34,9 +34,9 @@ from ImageQ.search.models import Prediction
 
 
 __all__ = [
-    'SearchBase',
-    'BasePredictor', 
-    'RequestHandler', 'UploadHandler',
+    'BaseSearch',
+    'BasePredictor',
+    'BaseHandler',
 ]
 
 class BaseSearch(object):
@@ -146,6 +146,10 @@ class BaseSearch(object):
         if engine=="Yahoo":
             offset = (page * 10) - 9
             search_url = search_fmt_string.format(query, offset)
+        if engine=="Bing":
+            # structure pages in terms of 
+            first= (page * 10) - 9
+            search_url = search_fmt_string.format(query, first)
         html = BaseSearch.getSource(search_url)
         return BeautifulSoup(html, 'lxml')
 
