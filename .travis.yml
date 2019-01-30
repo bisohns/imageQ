@@ -13,7 +13,8 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - python manage.py
+  # to replace with tests
+  - python setup.py
 
 deploy:
   provider: heroku

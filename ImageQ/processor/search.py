@@ -20,27 +20,102 @@
 
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
+from ImageQ.processor.consts import SEARCH_QUERY
 
 
-class Search(object):
+
+class SearchBase(object):
     """
+    Search base to be extended by search parsers
     """
-    def search(self, query, page):
+
+    def search(self, query, page=1):
+        """
+        Master method coordinating search parsing
+        """
+        raise NotImplementedError("subclasses must define method <search>")
+
+    @staticmethod
+    def parse_results(single_result):
+        """
+        Every div/span containing a result is passed here to retrieve
+        `title`, `link` and `descr`
+        """
+        raise NotImplementedError("subclasses must define method <parse_results>")
+    
+    @staticmethod
+    def parse_query(query):
+        """
+        Replace spaces in query
+
+        :param query: query to be processed
+        :type query: str
+        :rtype: str
+        """
+        return query.replace(" ", "%20")
+    
+    @staticmethod
+    def getSource(url):
+        """
+        Returns the source code of a webpage.
+
+        :rtype: string
+        :param url: URL to pull it's source code
+        :return: html source code of a given URL.
+        """
+        import requests
+        # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
+        # prevent caching
+        headers={'Cache-Control': 'no-cache'}
+        try:
+            print(url)
+            response = requests.get(url, headers=headers)
+            html = response.text
+        except Exception as e:
+            raise Exception('ERROR: {}\n'.format(e))
+        return str(html)   
+
+    @staticmethod
+    def get_soup(raw_query, engine="Google", page=1):
+        """
+        Get the html soup of a query
+
+        :param raw_query: unprocessed query string
+        :type raw_query: str
+        :param engine: search engine to make use of, defaults to google
+        :type engine: str
+        :param page: page to return
+        :type page: int
+        :rtype: `bs4.ResultSet`
+        """
+        # replace spaces in string
+        query = SearchBase.parse_query(raw_query)
+        search_fmt_string = SEARCH_QUERY[engine]
+        if engine=="Google":
+            search_url = search_fmt_string.format(query, page)
+        if engine=="Yahoo":
+            offset = 10 * page - 9
+            search_url = search_fmt_string.format(query, offset)
+        html = SearchBase.getSource(search_url)
+        return BeautifulSoup(html, 'lxml')
+
+
+
+class GoogleSearch(SearchBase):
+    """
+    Searches Google for string
+    """
+    def search(self, query, page=1):
         """
         Parses Google for a search query.
 
         :param query: Search query sentence or term
         :type query: string
-        :param page: Page to be displayed.
+        :param page: Page to be displayed, defaults to 1
         :type page: int
         :return: dictionary. Containing titles, links, netlocs and descriptions.
         """
-        # replace spaces in query string
-        query = query.replace(" ", "%20")
-        googleSearchURL = 'https://www.google.com/search?q={}&start={}'
-        googleSearchURL = googleSearchURL.format(query, page)
-        html = Search.getSource(googleSearchURL)
-        soup = BeautifulSoup(html, 'lxml')
+        soup = GoogleSearch.get_soup(query, engine="Google", page=page)
         # # find all class_='g' => each result
         results = soup.find_all('div', class_='g')
         if not results:
@@ -52,7 +127,7 @@ class Search(object):
         for each in results:
             title=link=desc=netloc = " "
             try:
-                title, link, desc = Search.parse_results(each)
+                title, link, desc = GoogleSearch.parse_results(each)
                 netloc = urlparse(link).netloc
                 ''' Append links and text to a list '''
                 titles.append(title)
@@ -66,6 +141,7 @@ class Search(object):
                           'netlocs': netlocs,
                           'descriptions': descs}
         return search_results
+
 
     @staticmethod
     def parse_results(single_result):
@@ -91,29 +167,8 @@ class Search(object):
         desc = desc.text
         return title, link, desc
 
-    @staticmethod
-    def getSource(url):
-        """
-        Returns the source code of a webpage.
-
-        :rtype: string
-        :param url: URL to pull it's source code
-        :return: html source code of a given URL.
-        """
-        import requests
-        # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
-        # prevent caching
-        headers={'Cache-Control': 'no-cache'}
-        try:
-            print(url)
-            response = requests.get(url, headers=headers)
-            html = response.text
-        except Exception as e:
-            raise Exception('ERROR: {}\n'.format(e))
-        return str(html)
-
 
 if __name__ == '__main__':
-    search = Search()
+    search = GoogleSearch()
     results = search.search('preaching to the choir', 1)
     print(results)

@@ -156,3 +156,10 @@ IMAGE_TYPES = {
     'image/jpeg': "jpeg",
     'image/jpg': "jpg",
 }
+
+# Search string Constants
+
+SEARCH_QUERY = {
+    "Google": 'https://www.google.com/search?q={}&start={}',
+    "Yahoo": 'https://search.yahoo.com/search?p={}&b={}'
+}

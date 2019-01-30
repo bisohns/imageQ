@@ -7,7 +7,7 @@ from .forms import SearchForm
 from .models import Prediction
 from django.views import View
 from urllib.parse import urlparse
-from ImageQ.processor.search import Search
+from ImageQ.processor.search import GoogleSearch
 
 
 class SearchView(FormView):
@@ -24,7 +24,7 @@ class SearchView(FormView):
 
 class ResultView(View):
     template_name = "search/results.html"
-    google_search_handler = Search()
+    search_handler = GoogleSearch()
 
     @staticmethod
     def select_prediction(prediction_list, select_index):
@@ -59,7 +59,7 @@ class ResultView(View):
         :return: dictionary [titles, links, netlocs and descriptions] and sucess value
         :rtype: dict, bool
         """
-        search_results = self.google_search_handler.search(search_term, 1)
+        search_results = self.search_handler.search(search_term, 1)
         search_success = True
         return search_results, search_success
 
