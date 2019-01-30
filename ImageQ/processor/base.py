@@ -147,10 +147,8 @@ class BaseSearch(object):
             offset = (page * 10) - 9
             search_url = search_fmt_string.format(query, offset)
         if engine=="Bing":
-            if page!=1 :
-                first= ((page - 1) * 10) + 1
-            else:
-                first=1
+            # structure pages in terms of 
+            first= (page * 10) - 9
             search_url = search_fmt_string.format(query, first)
         html = BaseSearch.getSource(search_url)
         return BeautifulSoup(html, 'lxml')
