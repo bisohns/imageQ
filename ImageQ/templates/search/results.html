@@ -40,14 +40,14 @@
             <img src="{{ image_url }}" alt="Uploaded Image" height="200px" width="200px" id="imageq-upload" class="rounded align-self-center" >
             <div class="container mt-2">
               <div class="bg-success p-3">
-                <a href="{% url 'search:results' pk select_index %}" class="text-white">
+                <a href="{% url 'search:results' pk engine select_index %}" class="text-white">
                     Prediction: {{ search_term }}<br>
                     Probability: {{ probability }}<br>
                     </a>
               </div>
               {% for i in other_predictions_range %}
               <div class="bg-secondary p-3 mt-2">
-                <a href="{% url 'search:results' pk other_predictions|get_index:i %}" class="text-white">
+                <a href="{% url 'search:results' pk engine other_predictions|get_index:i %}" class="text-white">
                     Prediction: {% get_pred_item other_predictions i "label" %}<br>
                     Probability: {% get_pred_item other_predictions i "probability" %}<br>
                     </a>
