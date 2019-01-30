@@ -93,10 +93,16 @@ Code Documentation is available on [Github Pages](https://bisoncorps.github.io/i
 
 All important production settings are in the `ImageQ.settings.production.py` file.<br />
 Settings should be inherited from `ImageQ.settings.common.py` for development or used as it is<br />
+To change from local settings to production settings and vice-versa, change `current_settings` variable in `ImageQ.wsgi.py` accordingly<br />
 All Celery async tasks are located in `tasks.py` of each app file in each app directory
 
 ## Todo
 
-- Beautify ImageQ query page
-- Create protocol for incorrect classifications
-- Fix media issue on heroku (image search)
+- [ ] Create protocol for incorrect classifications
+- [ ] Change deployment of static/media files to nginx/apache_mod or on AWS S3 bucket
+- [ ] Integrate Search query over google, yahoo, duck duck go etc. and Allow switching between them
+- [ ] Beautify ImageQ query page
+- [ ] Create protocol for incorrect classifications
+- [ ] Add upload image functionality
+- [ ] Receive top predictions from API and display in google-like format
+- [ ] Incorporate bootstrap locally? 

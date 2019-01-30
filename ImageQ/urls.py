@@ -17,11 +17,18 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from ImageQ.search.views import handler404
+from django.views.static import serve
 
-
-handler404 = handler404
-
+#pylint: disable=invalid-name
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include('ImageQ.search.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# Static and media files should be hosted using nginx/apache_mod or S3 on AWS
+# Or the django application hosted on PythonAnywhere
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)

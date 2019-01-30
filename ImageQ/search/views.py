@@ -10,14 +10,6 @@ from urllib.parse import urlparse
 from ImageQ.processor.search import Search
 
 
-def handler404(request, template_name="404.html"):
-    """
-    Default 404 handler
-    """
-    data = {}
-    return render(request, template_name, data)
-
-
 class SearchView(FormView):
     template_name = "search/index.html"
     form_class = SearchForm
@@ -34,7 +26,6 @@ class ResultView(View):
     template_name = "search/results.html"
     google_search_handler = Search()
 
-
     @staticmethod
     def select_prediction(prediction_list, select_index):
         """
@@ -49,7 +40,7 @@ class ResultView(View):
         """
         other_predictions = list()
         # only 3 predictions are ever returned from API
-        if select_index<0 or select_index >=3:
+        if select_index < 0 or select_index >= 3:
             raise ValueError(f"prediction index {select_index} does not exist")
         else:
             top_prediction = prediction_list[select_index]
@@ -58,7 +49,6 @@ class ResultView(View):
                     prediction_list[i]["index"] = i
                     other_predictions.append(prediction_list[i])
             return top_prediction, other_predictions
-
 
     def search(self, search_term):
         """
@@ -76,7 +66,7 @@ class ResultView(View):
     def get(self, request, pk, select_index=0):
         """
         Render results 
-        
+
         :param request: request object
         :type request: `django.core.handlers.wsgi.WSGIRequest`
         :param pk: primary key of prediction object to retrieve
@@ -88,36 +78,35 @@ class ResultView(View):
         image_url = prediction.image.url
         date_stored = prediction.date_stored
         top_prediction, other_predictions = ResultView.select_prediction(
-                        prediction_list=prediction.predictions["predictions"],
-                        select_index=select_index)
+            prediction_list=prediction.predictions["predictions"],
+            select_index=select_index)
         probability = top_prediction["probability"]
         search_term = top_prediction["label"].replace("_", " ")
         main_args = {
-                    "image_url": image_url, 
-                    "pk": pk,
-                    "search_term": search_term,
-                    "other_predictions": other_predictions,
-                    "other_predictions_range": range(len(other_predictions)),
-                    "select_index": select_index,
-                    "date_stored": date_stored,
-                    "probability": probability,
-                    }
+            "image_url": image_url,
+            "pk": pk,
+            "search_term": search_term,
+            "other_predictions": other_predictions,
+            "other_predictions_range": range(len(other_predictions)),
+            "select_index": select_index,
+            "date_stored": date_stored,
+            "probability": probability,
+        }
         try:
             print(search_term)
             search_results, search_success = self.search(search_term)
             return render(request, self.template_name, {
-                                **main_args,
-                                "range": range(len(search_results["titles"])),
-                                "search_success": search_success,
-                                "search_results": search_results,
-                                })
+                **main_args,
+                "range": range(len(search_results["titles"])),
+                "search_success": search_success,
+                "search_results": search_results,
+            })
         except Exception as e:
             search_success = False
             error = e
             print(search_success)
             return render(request, self.template_name, {
-                                **main_args,
-                                "search_success": search_success,
-                                "error": error
-                                })
-
+                **main_args,
+                "search_success": search_success,
+                "error": error
+            })
