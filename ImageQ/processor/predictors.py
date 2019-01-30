@@ -18,11 +18,7 @@
 
  """
 
-
-import urllib3
-import os
-from django.conf import settings
-from ImageQ.processor.base import BasePredictor, RequestHandler, UploadHandler
+from ImageQ.processor.base import BasePredictor
 
 class URLPredictor(BasePredictor):
     """This is a URL class predictor for the ResNet model 

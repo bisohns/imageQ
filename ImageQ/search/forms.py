@@ -4,7 +4,8 @@ import http.client
 from django import forms
 from django.conf import settings
 from urllib.parse import urlparse
-from ImageQ.processor.predictors import URLPredictor, RequestHandler, UploadHandler
+from ImageQ.processor.predictors import URLPredictor
+from ImageQ.processor.handlers import RequestHandler, UploadHandler
 from ImageQ.search.models import Prediction
 
 class SearchForm(forms.Form):
