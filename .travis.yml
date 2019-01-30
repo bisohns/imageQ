@@ -14,7 +14,7 @@ install:
 
 script:
   # to replace with tests
-  - python setup.py
+  - python setup.py install
 
 deploy:
   provider: heroku
