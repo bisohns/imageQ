@@ -20,28 +20,71 @@
 
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from ImageQ.processor.consts import SEARCH_QUERY
+from abc import ABCMeta, abstractmethod
+
+# from ImageQ.processor.consts import SEARCH_QUERY
+
+SEARCH_QUERY = {
+    "Google": 'https://www.google.com/search?q={}&start={}',
+    "Yahoo": 'https://search.yahoo.com/search?p={}&b={}'
+}
 
 
 
 class SearchBase(object):
+
+    __metaclass__ = ABCMeta
+
     """
     Search base to be extended by search parsers
+    Every subclass must have two methods `search` amd `parse_single_result`
     """
 
+    @abstractmethod
     def search(self, query, page=1):
         """
         Master method coordinating search parsing
         """
         raise NotImplementedError("subclasses must define method <search>")
 
-    @staticmethod
-    def parse_results(single_result):
+    @abstractmethod
+    def parse_single_result(self, single_result):
         """
         Every div/span containing a result is passed here to retrieve
         `title`, `link` and `descr`
         """
         raise NotImplementedError("subclasses must define method <parse_results>")
+    
+    def parse_result(self, results):
+        """
+        Runs every entry on the page through parse_single_result
+
+        :param results: Result of main search to extract individual results
+        :type results: list[`bs4.element.ResultSet`]
+        :returns: dictionary. Containing titles, links, netlocs and descriptions.
+        :rtype: dict
+        """
+        titles = []
+        links = []
+        netlocs = []
+        descs = []
+        for each in results:
+            title=link=desc=netloc = " "
+            try:
+                title, link, desc = self.parse_single_result(each)
+                netloc = urlparse(link).netloc
+                ''' Append links and text to a list '''
+                titles.append(title)
+                links.append(link)
+                netlocs.append(netloc)
+                descs.append(desc)
+            except Exception as e:
+                print(e)
+        search_results = {'titles': titles,
+                          'links': links,
+                          'netlocs': netlocs,
+                          'descriptions': descs}
+        return search_results
     
     @staticmethod
     def parse_query(query):
@@ -68,7 +111,6 @@ class SearchBase(object):
         # prevent caching
         headers={'Cache-Control': 'no-cache'}
         try:
-            print(url)
             response = requests.get(url, headers=headers)
             html = response.text
         except Exception as e:
@@ -86,7 +128,7 @@ class SearchBase(object):
         :type engine: str
         :param page: page to return
         :type page: int
-        :rtype: `bs4.ResultSet`
+        :rtype: `bs4.element.ResultSet`
         """
         # replace spaces in string
         query = SearchBase.parse_query(raw_query)
@@ -94,7 +136,7 @@ class SearchBase(object):
         if engine=="Google":
             search_url = search_fmt_string.format(query, page)
         if engine=="Yahoo":
-            offset = 10 * page - 9
+            offset = (page * 10) - 9
             search_url = search_fmt_string.format(query, offset)
         html = SearchBase.getSource(search_url)
         return BeautifulSoup(html, 'lxml')
@@ -120,31 +162,10 @@ class GoogleSearch(SearchBase):
         results = soup.find_all('div', class_='g')
         if not results:
             raise ValueError("The result parsing was unsuccessful, flagged as unusual traffic")
-        titles = []
-        links = []
-        netlocs = []
-        descs = []
-        for each in results:
-            title=link=desc=netloc = " "
-            try:
-                title, link, desc = GoogleSearch.parse_results(each)
-                netloc = urlparse(link).netloc
-                ''' Append links and text to a list '''
-                titles.append(title)
-                links.append(link)
-                netlocs.append(netloc)
-                descs.append(desc)
-            except Exception as e:
-                print(e)
-        search_results = {'titles': titles,
-                          'links': links,
-                          'netlocs': netlocs,
-                          'descriptions': descs}
+        search_results = self.parse_result(results)
         return search_results
 
-
-    @staticmethod
-    def parse_results(single_result):
+    def parse_single_result(self, single_result):
         """
         Parses the source code to return
 
@@ -167,8 +188,56 @@ class GoogleSearch(SearchBase):
         desc = desc.text
         return title, link, desc
 
+class YahooSearch(SearchBase):
+    """
+    Searches Yahoo for string
+    """
+    def search(self, query, page=1):
+        """
+        Parses Google for a search query.
+
+        :param query: Search query sentence or term
+        :type query: string
+        :param page: Page to be displayed, defaults to 1
+        :type page: int
+        :return: dictionary. Containing titles, links, netlocs and descriptions.
+        """
+        soup = YahooSearch.get_soup(query, engine="Yahoo", page=page)
+        # find all divs
+        results = soup.find_all('div', class_='Sr')
+        if not results:
+            raise ValueError("The result parsing was unsuccessful, flagged as unusual traffic")
+        search_results = self.parse_result(results)
+        return search_results 
+
+    def parse_single_result(self, single_result):
+        """
+        Parses the source code to return
+
+        :param single_result: single result found in <div class="Sr">
+        :type single_result: `bs4.element.ResultSet`
+        :return: parsed title, link and description of single result
+        :rtype: str, str, str
+        """
+        h3 = single_result.find('h3', class_='title')
+        link_tag = h3.find('a')
+        desc = single_result.find('p', class_='lh-16')
+        ''' Get the text and link '''
+        title = h3.text
+
+        # raw link is of format "/url?q=REAL-LINK&sa=..."
+        link = link_tag.get('href')
+
+        desc = desc.text
+        return title, link, desc
+
 
 if __name__ == '__main__':
-    search = GoogleSearch()
-    results = search.search('preaching to the choir', 1)
-    print(results)
+    search_args = ('preaching to the choir', 3)
+    gsearch = GoogleSearch()
+    ysearch = YahooSearch()
+    gresults = gsearch.search(*search_args)
+    yresults = ysearch.search(*search_args)
+    print(yresults["titles"][1])
+    print(gresults["titles"][1])
+
