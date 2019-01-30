@@ -5,7 +5,6 @@
 - [ ] Write Tests per applications and run before deployment
 - [x] Integrate Search query over google, yahoo, bing etc. and Allow switching between them
 - [ ] Beautify ImageQ query page
-- [ ] Create protocol for incorrect classifications
 - [x] Add upload image functionality
-- [ ] Receive top predictions from API and display in google-like format
+- [x] Receive top predictions from API and display in google-like format
 - [ ] Incorporate bootstrap locally?
