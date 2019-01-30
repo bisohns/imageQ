@@ -25,11 +25,13 @@ class URLPredictor(BasePredictor):
 
     :param prediction_api: url of the prediction api to send requests to
     :type prediction_api: str
-    :param image_url: url to the image to be predicted
-    :type image_url: str
+    :param image: image to be predicted
+    :type image: `django.db.models.fields.files.ImageFieldFile`
 
     Example:
-        >>> predictor = URLPredictor(prediction_api="https://imageqapi.appspot.com/predict", image_url="https://example_image.com/image-jpg")
+        >>> from ImageQ.search.models import Prediction
+        >> prediction_model = Prediction.objects.get(pk=1)
+        >>> predictor = URLPredictor(prediction_api="https://imageqapi.appspot.com/predict", image=prediction_model.image)
         >>> predictor.predict()
     """
     def __init__(self, prediction_api, image):

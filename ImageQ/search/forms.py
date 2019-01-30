@@ -91,6 +91,7 @@ class SearchForm(forms.Form):
             prediction_model = req.save()
             # prediction_model.image.save(image_data)
         # Predicts the IMage and stores data in database
+        print(type(prediction_model.image))
         urlpredictor = URLPredictor(
                         prediction_api=settings.PREDICTION_API,
                         image=prediction_model.image)
