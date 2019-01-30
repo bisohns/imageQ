@@ -37,12 +37,13 @@
           </span>
         </div>
         <div class="d-flex flex-row justify-content-end mt-2">
-            <select id="inputType" onchange="changeField(this)">
+            <select id="inputType" onchange="changeField(this)" required>
               <option value="url" selected>Image URL
               </option>
               <option value="upload">Upload
               </option>
             </select>
+            {{ form.engine }}
         </div>
       </form>
     </div>

@@ -8,10 +8,15 @@ from ImageQ.processor.predictors import URLPredictor, RequestHandler, UploadHand
 from ImageQ.search.models import Prediction
 
 class SearchForm(forms.Form):
+    engine_choices = (
+        ("Google", "Google"),
+        ("Yahoo", "Yahoo")
+    )
     image_type = ""
     is_multipart = True
     image = forms.ImageField(required=False)
     url = forms.URLField(required=False)
+    engine = forms.ChoiceField(choices=engine_choices ,required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -65,6 +70,8 @@ class SearchForm(forms.Form):
         """
         url = self.cleaned_data.get('url')
         image = self.cleaned_data.get('image')
+        engine = self.cleaned_data.get('engine')
+
         if url:
             image_data = { "url": url, "ext": self.image_type }
             prediction = None
@@ -90,5 +97,5 @@ class SearchForm(forms.Form):
         prediction_model.predictions = _predictions
         prediction_model.save()
         prediction = prediction_model
-        return prediction
+        return prediction, engine
         

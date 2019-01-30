@@ -16,7 +16,8 @@ class SearchView(FormView):
     success_url = '/results'
 
     def form_valid(self, form):
-        prediction = form.predict()
+        # returns the prediction model and engine to use
+        prediction, engine = form.predict()
         if not prediction:
             return HttpResponse('Something Just happened right now')
         return redirect(reverse('search:results', args=[prediction.id, ]))

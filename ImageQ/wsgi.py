@@ -24,7 +24,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-current_settings = "ImageQ.settings.local_settings"
+current_settings = "ImageQ.settings.production"
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', current_settings)
 
