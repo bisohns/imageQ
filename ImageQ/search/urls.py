@@ -26,7 +26,10 @@ app_name = "search"
 
 urlpatterns = [
     path('', SearchView.as_view(), name="index"),
-    path('results/<int:pk>', ResultView.as_view(), name="results"),
+    path('results/<int:pk>/<str:engine>', ResultView.as_view(), name="results"),
+    path('results/<int:pk>/<str:engine>/<int:select_index>',
+         ResultView.as_view(), name="results"),
+	path('results/<int:pk>', ResultView.as_view(), name="results"),
     path('results/<int:pk>/<int:select_index>',
          ResultView.as_view(), name="results"),
 ]

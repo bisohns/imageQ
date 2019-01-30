@@ -7,7 +7,7 @@ from .forms import SearchForm
 from .models import Prediction
 from django.views import View
 from urllib.parse import urlparse
-from ImageQ.processor.search import GoogleSearch
+from ImageQ.processor.search import GoogleSearch, YahooSearch
 
 
 class SearchView(FormView):
@@ -20,11 +20,12 @@ class SearchView(FormView):
         prediction, engine = form.predict()
         if not prediction:
             return HttpResponse('Something Just happened right now')
-        return redirect(reverse('search:results', args=[prediction.id, ]))
+        return redirect(reverse('search:results', args=[prediction.id, engine, ]))
 
 
 class ResultView(View):
     template_name = "search/results.html"
+    # default handler is google search
     search_handler = GoogleSearch()
 
     @staticmethod
@@ -64,7 +65,7 @@ class ResultView(View):
         search_success = True
         return search_results, search_success
 
-    def get(self, request, pk, select_index=0):
+    def get(self, request, pk, engine="Google", select_index=0):
         """
         Render results 
 
@@ -72,9 +73,16 @@ class ResultView(View):
         :type request: `django.core.handlers.wsgi.WSGIRequest`
         :param pk: primary key of prediction object to retrieve
         :type pk: int
+        :param engine: the search parsing engine to use for the search
+        :type engine: str
         :param select_index: index of prediction to choose from (defaults to 0)
         :type select_index: int
         """
+        if engine=="Google":
+            self.search_handler = GoogleSearch()
+        if engine=="Google":
+            self.search_handler = YahooSearch()
+
         prediction = Prediction.objects.get(pk=pk)
         image_url = prediction.image.url
         date_stored = prediction.date_stored
@@ -92,6 +100,7 @@ class ResultView(View):
             "select_index": select_index,
             "date_stored": date_stored,
             "probability": probability,
+            "engine": engine,
         }
         try:
             print(search_term)

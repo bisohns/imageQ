@@ -22,7 +22,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from abc import ABCMeta, abstractmethod
 
-# from ImageQ.processor.consts import SEARCH_QUERY
+from ImageQ.processor.consts import SEARCH_QUERY
 
 SEARCH_QUERY = {
     "Google": 'https://www.google.com/search?q={}&start={}',
