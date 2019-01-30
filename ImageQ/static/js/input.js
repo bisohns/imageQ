@@ -10,7 +10,7 @@ function changeField(selectObject) {
     var selected_option = selectObject.value; 
     var url_div = document.getElementById("url-div")
     var upload_div = document.getElementById("upload-div")
-    console.log(selected_option)
+    // console.log("Selected option ->" + selected_option)
 
     if (selected_option==="url") {
         url_div.style.display = `inline-block`;

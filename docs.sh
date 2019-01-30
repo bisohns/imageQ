@@ -19,4 +19,9 @@ rm -r ./docs
 git add .
 git commit -am "rebuilt docs"
 git push -q https://${GITHUB_TOKEN}@github.com/bisoncorps/imageQ.git gh-pages --force
-echo "at end of docbuilder script"
+# echo if docs was succesfully pushed
+if [ $? -eq 0 ]; then
+    echo "Docs successfully pushed to Github Pages"
+else
+    echo "Failed to push docs"
+fi

@@ -12,9 +12,11 @@ DEBUG = False
 # SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 # SENDGRID_ECHO_TO_STDOUT = True
 
+DATABASE_URL = os.environ.get("DATABASE_URL") # environment key provided by heroku
+
 #heroku database
 DATABASES = {
-    'default': dj_database_url.parse('postgres://rltwwwpyvwzzlt:e3165ba253100fcb66c589901607b44bd8d81404ea400191333c85bbec952a63@ec2-54-75-230-41.eu-west-1.compute.amazonaws.com:5432/d31k5vbdupfdvg')
+    'default': dj_database_url.parse(DATABASE_URL)
 }
 
 PREDICTION_API = "https://imageqapi.appspot.com/predict"

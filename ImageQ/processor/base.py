@@ -1,5 +1,5 @@
 """@desc 
-        Base Architecture, Reuest Handlers and Logger for Predictors
+        Base Architecture, Request Handlers and Logger for Predictors
 
      @author 
          Domnan Diretnan
