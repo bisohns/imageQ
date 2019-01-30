@@ -10,7 +10,10 @@ Welcome to ImageQ's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+Readme File
+===========
 
+.. mdinclude:: ../../README.md
 
 Indices and tables
 ==================
