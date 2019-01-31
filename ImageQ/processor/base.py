@@ -157,7 +157,7 @@ class BaseSearch(object):
             # structure pages in terms of 
             first= (page * 10) - 9
             search_url = search_fmt_string.format(query, first)
-        html = BaseSearch.getSource(search_url)
+        html = BaseSearch.get_source(search_url)
         return BeautifulSoup(html, 'lxml')
 
 
