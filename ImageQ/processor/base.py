@@ -9,6 +9,11 @@
          Github: https://github.com/deven96
          GitLab: https://gitlab.com/Deven96
 
+         Manasseh Mmadu
+         Email: mmadumanasseh@gmail.com
+         Github: https://github.com/MeNsaaH
+         Gitlab: https://gitlab.com/MeNsaaH
+
      @project
          @create date 2018-12-28 02:03:05
          @modify date 2018-12-28 02:18:59
@@ -28,8 +33,7 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
-from django.core import files
-from ImageQ.processor.consts import FS, IMAGE_TYPES, SEARCH_QUERY, File
+from ImageQ.processor.consts import FS, IMAGE_TYPES, SEARCH_QUERY
 from ImageQ.search.models import Prediction
 
 
@@ -38,6 +42,7 @@ __all__ = [
     'BasePredictor',
     'BaseHandler',
 ]
+
 
 class BaseSearch(object):
 
@@ -61,8 +66,9 @@ class BaseSearch(object):
         Every div/span containing a result is passed here to retrieve
         `title`, `link` and `descr`
         """
-        raise NotImplementedError("subclasses must define method <parse_results>")
-    
+        raise NotImplementedError(
+            "subclasses must define method <parse_results>")
+
     def parse_result(self, results):
         """
         Runs every entry on the page through parse_single_result
@@ -77,7 +83,7 @@ class BaseSearch(object):
         netlocs = []
         descs = []
         for each in results:
-            title=link=desc=netloc = " "
+            title = link = desc = netloc = " "
             try:
                 title, link, desc = self.parse_single_result(each)
                 netloc = urlparse(link).netloc
@@ -93,7 +99,8 @@ class BaseSearch(object):
                           'netlocs': netlocs,
                           'descriptions': descs}
         return search_results
-    
+
+    # TODO Use urllib's parse url
     @staticmethod
     def parse_query(query):
         """
@@ -104,9 +111,9 @@ class BaseSearch(object):
         :rtype: str
         """
         return query.replace(" ", "%20")
-    
+
     @staticmethod
-    def getSource(url):
+    def get_source(url):
         """
         Returns the source code of a webpage.
 
@@ -117,13 +124,13 @@ class BaseSearch(object):
         import requests
         # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
         # prevent caching
-        headers={'Cache-Control': 'no-cache'}
+        headers = {'Cache-Control': 'no-cache'}
         try:
             response = requests.get(url, headers=headers)
             html = response.text
         except Exception as e:
             raise Exception('ERROR: {}\n'.format(e))
-        return str(html)   
+        return str(html)
 
     @staticmethod
     def get_soup(raw_query, engine="Google", page=1):
@@ -141,9 +148,9 @@ class BaseSearch(object):
         # replace spaces in string
         query = BaseSearch.parse_query(raw_query)
         search_fmt_string = SEARCH_QUERY[engine]
-        if engine=="Google":
+        if engine == "Google":
             search_url = search_fmt_string.format(query, page)
-        if engine=="Yahoo":
+        if engine == "Yahoo":
             offset = (page * 10) - 9
             search_url = search_fmt_string.format(query, offset)
         if engine=="Bing":
@@ -162,10 +169,11 @@ class BasePredictor(object):
         prediction_api[str]: url of the AI prediction API predict route
 
     """
+
     def __init__(self):
         """Constructor method
         """
-        self.__metaclass__  = abc.ABCMeta
+        self.__metaclass__ = abc.ABCMeta
         self.prediction_api = None
 
     @property
@@ -185,6 +193,7 @@ class BasePredictor(object):
             raise AttributeError("Attribute <prediction_api> is of type None")
         return r.content
 
+
 class BaseHandler(object):
     __metaclass__ = ABCMeta
 
@@ -192,7 +201,7 @@ class BaseHandler(object):
     @abstractmethod
     def image_data(self):
         return NotImplementedError("self.image_data must be defined")
-    
+
     @property
     @abstractmethod
     def ext(self):
