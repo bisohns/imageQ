@@ -79,7 +79,7 @@ The prediction API code can be found at the [repo](https://github.com/deven96/Im
 
 The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com)
 ![Homepage](docs/assets/homepage.png)
- and it sends requests to the deployed [prediction API](https://imageqapi.appspot.com/)
+and it sends requests to the deployed [prediction API](https://imageqapi.appspot.com/)
 
 ## Example
 
@@ -98,4 +98,4 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 ## Todo
 
-See ![TODO](TODO.md) 
+See [TODO](TODO.md) 
