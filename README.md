@@ -31,6 +31,14 @@ Activate virtual environment. All project work should be done in virtualenvs and
 
 ### Installation
 
+#### From Make File
+- You could easily run from project directory to setup project or follow through
+```bash
+    make
+```
+
+#### Step by step Setup
+
 - Install the requirements
 
 ```bash
@@ -98,4 +106,4 @@ All Celery async tasks are located in `tasks.py` of each app file in each app di
 
 ## Todo
 
-See ![TODO](TODO.md) 
+See ![TODO](TODO.md)
