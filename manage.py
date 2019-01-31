@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 import sys
-from ImageQ import current_settings
 
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ImageQ.settings.local_settings')
