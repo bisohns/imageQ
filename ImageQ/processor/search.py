@@ -8,6 +8,11 @@
  		Github: https://github.com/deven96
  		GitLab: https://gitlab.com/Deven96
 
+                Manasseh Mmadu
+                email: mmadumanasseh@gmail.com
+                Github: https://github.com/MeNsaaH
+                Gitlab: https://gitlab.com/MeNsaaH
+
  	@project
  		@create date 2019-01-26 23:14:22
  		@modify date 2019-01-26 23:14:22
@@ -25,6 +30,7 @@ class GoogleSearch(BaseSearch):
     """
     Searches Google for string
     """
+
     def search(self, query, page=1):
         """
         Parses Google for a search query.
@@ -39,7 +45,8 @@ class GoogleSearch(BaseSearch):
         # # find all class_='g' => each result
         results = soup.find_all('div', class_='g')
         if not results:
-            raise ValueError("The result parsing was unsuccessful, flagged as unusual traffic")
+            raise ValueError(
+                "The result parsing was unsuccessful, flagged as unusual traffic")
         search_results = self.parse_result(results)
         return search_results
 
@@ -66,10 +73,12 @@ class GoogleSearch(BaseSearch):
         desc = desc.text
         return title, link, desc
 
+
 class YahooSearch(BaseSearch):
     """
     Searches Yahoo for string
     """
+
     def search(self, query, page=1):
         """
         Parses Yahoo for a search query.
@@ -84,9 +93,10 @@ class YahooSearch(BaseSearch):
         # find all divs
         results = soup.find_all('div', class_='Sr')
         if not results:
-            raise ValueError("The result parsing was unsuccessful, flagged as unusual traffic")
+            raise ValueError(
+                "The result parsing was unsuccessful, flagged as unusual traffic")
         search_results = self.parse_result(results)
-        return search_results 
+        return search_results
 
     def parse_single_result(self, single_result):
         """
@@ -165,4 +175,3 @@ if __name__ == '__main__':
     print(yresults["titles"][1])
     print(gresults["titles"][1])
     print(bresults["titles"][1])
-
