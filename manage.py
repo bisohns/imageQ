@@ -4,8 +4,8 @@ import sys
 from ImageQ import current_settings
 
 if __name__ == '__main__':
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                          current_settings)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ImageQ.settings.local_settings')
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
