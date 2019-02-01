@@ -11,6 +11,12 @@ git config --global user.name "Travis CI"
 
 # Checkout to gh-pages
 git checkout gh-pages
+if  [ $? -eq 0] then
+   echo "Checked out to existing gh-pages branch"
+else
+   git checkout -b gh-pages
+   echo "Creating gh-pages branch"
+fi 
 
 #remove existing files except html
 shopt -s extglob
