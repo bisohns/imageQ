@@ -7,7 +7,7 @@ from .forms import SearchForm
 from .models import Prediction
 from django.views import View
 from urllib.parse import urlparse
-from ImageQ.processor.search import GoogleSearch, YahooSearch, BingSearch
+from search_engine_parser import GoogleSearch, YahooSearch, BingSearch
 
 
 class SearchView(FormView):
