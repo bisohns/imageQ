@@ -24,8 +24,5 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-current_settings = "ImageQ.settings.local_settings"
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', current_settings)
 
 application = get_wsgi_application()

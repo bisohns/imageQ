@@ -12,6 +12,7 @@ from ImageQ.processor.search import GoogleSearch, YahooSearch, BingSearch
 
 class SearchView(FormView):
     template_name = "search/index.html"
+    error_template_name = "search/error.html"
     form_class = SearchForm
     success_url = '/results'
 
@@ -19,7 +20,7 @@ class SearchView(FormView):
         # returns the prediction model and engine to use
         prediction, engine = form.predict()
         if not prediction:
-            return HttpResponse('Something Just happened right now')
+            return render(self.request, self.error_template_name)
         return redirect(reverse('search:results', args=[prediction.id, engine, ]))
 
 
@@ -78,7 +79,7 @@ class ResultView(View):
         :param select_index: index of prediction to choose from (defaults to 0)
         :type select_index: int
         """
-        if engine=="Google":
+        if engine == "Google":
             self.search_handler = GoogleSearch()
         if engine=="Yahoo":
             self.search_handler = YahooSearch()

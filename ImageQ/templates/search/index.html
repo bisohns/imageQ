@@ -25,7 +25,7 @@
         <form method="post">
       {% endif %}
         {% csrf_token %}
-        <div class="form-group">
+        <div class="d-flex justify-content-between">
           <div class="input-group" id="url-div" >
             {{ form.url|add_class:'form-control input-lg' }}
           </div>
@@ -35,11 +35,12 @@
           <div class="input-group" id="camera-div" style="display: none;">
             {{ form.camera|add_attribute:'capture' }}
           </div>
-          <span class="input-group-btn">
+          
+          <span class="input-group-btn ml-3">
             <button class="btn btn-default" type="submit">Search!</button>
           </span>
         </div>
-        <div class="d-flex flex-row justify-content-end mt-2">
+        <div class="d-flex flex-row justify-content-end mt-4">
             <select id="inputType" onchange="changeField(this)" required>
               <option value="url" selected>Image URL
               </option>
@@ -53,4 +54,9 @@
       </form>
     </div>
   </main>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/input.js' %}"></script>
 {% endblock %}
