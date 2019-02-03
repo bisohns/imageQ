@@ -8,6 +8,11 @@ def add_class(form_input, css_class):
     return form_input.as_widget(attrs={'class': css_class})
 
 @register.filter
+def add_attribute(form_input, attribute):
+    """ Adds attribute to a form field """
+    return form_input.as_widget(attrs={str(attribute): "environment"})
+
+@register.filter
 def get_href(search_results, index):
     """ gets href for search results """
     return search_results["links"][index]

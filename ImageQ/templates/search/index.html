@@ -32,6 +32,9 @@
           <div class="input-group" id="upload-div" style="display: none;">
             {{ form.image }}
           </div>
+          <div class="input-group" id="camera-div" style="display: none;">
+            {{ form.camera|add_attribute:'capture' }}
+          </div>
           <span class="input-group-btn">
             <button class="btn btn-default" type="submit">Search!</button>
           </span>
@@ -41,6 +44,8 @@
               <option value="url" selected>Image URL
               </option>
               <option value="upload">Upload
+              </option>
+              <option value="camera">Camera(mobile)
               </option>
             </select>
             {{ form.engine }}

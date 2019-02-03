@@ -17,6 +17,7 @@ class SearchForm(forms.Form):
     image_type = ""
     is_multipart = True
     image = forms.ImageField(required=False)
+    camera = forms.ImageField(required=False)
     url = forms.URLField(required=False)
     engine = forms.ChoiceField(choices=engine_choices ,required=True)
 
@@ -59,12 +60,14 @@ class SearchForm(forms.Form):
         cleaned_data = super().clean()
         image = cleaned_data.get('image')
         url = cleaned_data.get('url')
+        camera = cleaned_data.get('camera')
         
-        if not (url or image):
+        if not (url or image or camera):
             raise forms.ValidationError("You must provide either an image or a url to an image")
-        if image:
-            if not image.content_type.startswith("image/"):
-                raise forms.ValidationError("Uploaded file not of image type")
+        for i in (image, camera):
+            if i:
+                if not i.content_type.startswith("image/"):
+                    raise forms.ValidationError("Uploaded file not of image type")
         return cleaned_data
 
     def predict(self):
@@ -72,6 +75,7 @@ class SearchForm(forms.Form):
         """
         url = self.cleaned_data.get('url')
         image = self.cleaned_data.get('image')
+        camera = self.cleaned_data.get('camera')
         engine = self.cleaned_data.get('engine')
 
         if url:
@@ -88,6 +92,9 @@ class SearchForm(forms.Form):
         if image:
             # Save the Image uploaded image
             req = UploadHandler(image)
+            prediction_model = req.save()
+        if camera:
+            req = UploadHandler(camera)
             prediction_model = req.save()
             # prediction_model.image.save(image_data)
         # Predicts the IMage and stores data in database

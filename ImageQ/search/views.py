@@ -7,7 +7,7 @@ from .forms import SearchForm
 from .models import Prediction
 from django.views import View
 from urllib.parse import urlparse
-from search_engine_parser import GoogleSearch, YahooSearch, BingSearch
+from ImageQ.processor.search import GoogleSearch, YahooSearch, BingSearch
 
 
 class SearchView(FormView):
@@ -105,7 +105,6 @@ class ResultView(View):
             "engine": engine,
         }
         try:
-            print(search_term)
             search_results, search_success = self.search(search_term)
             return render(request, self.template_name, {
                 **main_args,
@@ -113,6 +112,7 @@ class ResultView(View):
                 "search_success": search_success,
                 "search_results": search_results,
             })
+
         except Exception as e:
             search_success = False
             error = e
