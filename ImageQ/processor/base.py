@@ -1,14 +1,13 @@
 """@desc 
         Provides base architectures to be extended:
         BasePredictor, BaseSearch and BaseHandler
-
      @author 
          Domnan Diretnan
          Artificial Intelligence Enthusiast & Software Engineer.
          Email: diretnandomnan@gmail.com
          Github: https://github.com/deven96
          GitLab: https://gitlab.com/Deven96
-
+         
          Manasseh Mmadu
          Email: mmadumanasseh@gmail.com
          Github: https://github.com/MeNsaaH
@@ -17,11 +16,9 @@
      @project
          @create date 2018-12-28 02:03:05
          @modify date 2018-12-28 02:18:59
-
     @license
         MIT License
         Copyright (c) 2018. Domnan Diretnan. All rights reserved
-
  """
 import abc
 import uuid
@@ -72,7 +69,6 @@ class BaseSearch(object):
     def parse_result(self, results):
         """
         Runs every entry on the page through parse_single_result
-
         :param results: Result of main search to extract individual results
         :type results: list[`bs4.element.ResultSet`]
         :returns: dictionary. Containing titles, links, netlocs and descriptions.
@@ -105,7 +101,6 @@ class BaseSearch(object):
     def parse_query(query):
         """
         Replace spaces in query
-
         :param query: query to be processed
         :type query: str
         :rtype: str
@@ -116,7 +111,6 @@ class BaseSearch(object):
     def get_source(url):
         """
         Returns the source code of a webpage.
-
         :rtype: string
         :param url: URL to pull it's source code
         :return: html source code of a given URL.
@@ -136,7 +130,6 @@ class BaseSearch(object):
     def get_soup(raw_query, engine="Google", page=1):
         """
         Get the html soup of a query
-
         :param raw_query: unprocessed query string
         :type raw_query: str
         :param engine: search engine to make use of, defaults to google
@@ -164,10 +157,8 @@ class BaseSearch(object):
 class BasePredictor(object):
     """This is the basic predictor extended by all other predictors
         Two main properties/attributes must be declared by subclasses
-
         image_path[str]: path to the image saved locally
         prediction_api[str]: url of the AI prediction API predict route
-
     """
 
     def __init__(self):
@@ -182,7 +173,6 @@ class BasePredictor(object):
 
     def predict(self):
         """ send requests to the prediction api
-
         :returns: json response from the api
         :rtype: dict
         """

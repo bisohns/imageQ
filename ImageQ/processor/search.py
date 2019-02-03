@@ -1,6 +1,5 @@
 """@desc 
 		Parser for google search results
-
  	@author 
  		Domnan Diretnan
  		Artificial Intelligence Enthusiast & Software Engineer.
@@ -8,19 +7,17 @@
  		Github: https://github.com/deven96
  		GitLab: https://gitlab.com/Deven96
 
-                Manasseh Mmadu
-                email: mmadumanasseh@gmail.com
-                Github: https://github.com/MeNsaaH
-                Gitlab: https://gitlab.com/MeNsaaH
-
+    Manasseh Mmadu
+    email: mmadumanasseh@gmail.com
+    Github: https://github.com/MeNsaaH
+    Gitlab: https://gitlab.com/MeNsaaH
+   
  	@project
  		@create date 2019-01-26 23:14:22
  		@modify date 2019-01-26 23:14:22
-
 	@license
 		MIT License
 		Copyright (c) 2018. Domnan Diretnan. All rights reserved
-
  """
 
 from ImageQ.processor.base import BaseSearch
@@ -34,7 +31,6 @@ class GoogleSearch(BaseSearch):
     def search(self, query, page=1):
         """
         Parses Google for a search query.
-
         :param query: Search query sentence or term
         :type query: string
         :param page: Page to be displayed, defaults to 1
@@ -53,7 +49,6 @@ class GoogleSearch(BaseSearch):
     def parse_single_result(self, single_result):
         """
         Parses the source code to return
-
         :param single_result: single result found in <div class="g">
         :type single_result: `bs4.element.ResultSet`
         :return: parsed title, link and description of single result
@@ -82,7 +77,6 @@ class YahooSearch(BaseSearch):
     def search(self, query, page=1):
         """
         Parses Yahoo for a search query.
-
         :param query: Search query sentence or term
         :type query: string
         :param page: Page to be displayed, defaults to 1
@@ -101,7 +95,6 @@ class YahooSearch(BaseSearch):
     def parse_single_result(self, single_result):
         """
         Parses the source code to return
-
         :param single_result: single result found in <div class="Sr">
         :type single_result: `bs4.element.ResultSet`
         :return: parsed title, link and description of single result
@@ -126,7 +119,6 @@ class BingSearch(BaseSearch):
     def search(self, query, page=1):
         """
         Parses Bing for a search query.
-
         :param query: Search query sentence or term
         :type query: string
         :param page: Page to be displayed, defaults to 1
@@ -145,7 +137,6 @@ class BingSearch(BaseSearch):
     def parse_single_result(self, single_result):
         """
         Parses the source code to return
-
         :param single_result: single result found in <div class="Sr">
         :type single_result: `bs4.element.ResultSet`
         :return: parsed title, link and description of single result

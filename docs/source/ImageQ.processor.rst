@@ -20,6 +20,14 @@ ImageQ.processor.consts module
     :undoc-members:
     :show-inheritance:
 
+ImageQ.processor.handlers module
+--------------------------------
+
+.. automodule:: ImageQ.processor.handlers
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ImageQ.processor.predictors module
 ----------------------------------
 
