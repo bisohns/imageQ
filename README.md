@@ -2,7 +2,7 @@
 
 Image search engine powered by Django
 
-[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python Django](https://img.shields.io/badge/Python-Django-blue.svg)](https://www.djangoproject.com/)
 
 [![Build Status](https://travis-ci.com/bisoncorps/imageQ.svg?branch=master)](https://travis-ci.com/bisoncorps/imageQ)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
