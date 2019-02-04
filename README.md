@@ -81,7 +81,7 @@ To view the API locally on port 9000
 
 ## Prediction API
 
-The prediction API code can be found at the [repo](https://github.com/deven96/ImageQ_API)
+The prediction API code can be found at the [repo](https://github.com/bisoncorps/imageQ)
 
 ## Deploy
 
