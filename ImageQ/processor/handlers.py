@@ -8,6 +8,11 @@
  		Github: https://github.com/deven96
  		GitLab: https://gitlab.com/Deven96
 
+                Manasseh Mmadu
+                Email: mmadumanasseh@gmail.com
+                Github: https://github.com/MeNsaaH
+                Gitlab: https://gitlab.com/MeNsaaH
+
  	@project
  		@create date 2019-01-30 21:18:30
  		@modify date 2019-01-30 21:18:30
