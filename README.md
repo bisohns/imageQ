@@ -2,8 +2,12 @@
 
 Image search engine powered by Django
 
+[![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg)](https://www.python.org/downloads/release/python-360/)
+
 [![Build Status](https://travis-ci.com/bisoncorps/imageQ.svg?branch=master)](https://travis-ci.com/bisoncorps/imageQ)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![Heroku App Status](http://heroku-shields.herokuapp.com/bisoncorps-imageq)](https://bisoncorps-imageq.herokuapp.com)
 
 - [ImageQ](#imageq)
   - [Getting Started](#getting-started)
@@ -73,7 +77,7 @@ To view the API locally on port 9000
 
 ## Prediction API
 
-The prediction API code can be found at the [repo](https://github.com/deven96/ImageQ_API)
+The prediction API code can be found at the [repo](https://github.com/bisoncorps/imageQ_API)
 
 ## Deploy
 
