@@ -87,6 +87,7 @@ To view the API locally on port 9000
 
 The prediction API code can be found at the [repo](https://github.com/bisoncorps/imageQ_API)
 
+
 ## Deploy
 
 The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com)
