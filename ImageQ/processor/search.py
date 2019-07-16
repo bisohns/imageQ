@@ -68,7 +68,6 @@ class GoogleSearch(BaseSearch):
         desc = desc.text
         return title, link, desc
 
-
 class YahooSearch(BaseSearch):
     """
     Searches Yahoo for string

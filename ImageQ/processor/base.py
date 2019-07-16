@@ -1,6 +1,10 @@
 """@desc 
         Provides base architectures to be extended:
         BasePredictor, BaseSearch and BaseHandler
+<<<<<<< HEAD
+=======
+
+>>>>>>> separated handlers
      @author 
          Domnan Diretnan
          Artificial Intelligence Enthusiast & Software Engineer.
