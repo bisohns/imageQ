@@ -18,6 +18,7 @@ Click==7.0
 cryptography==2.5
 dj-database-url==0.5.0
 Django==2.1.5
+django-cloudinary-storage==0.2.3
 docutils==0.14
 first==2.0.1
 Flask==1.0.2

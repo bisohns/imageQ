@@ -19,4 +19,7 @@ DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
 }
 
-PREDICTION_API = "172.104.78.30/predict"
+PREDICTION_API = "http://172.104.78.30/predict"
+
+# cloudinary media storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

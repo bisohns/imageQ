@@ -34,7 +34,7 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
-from ImageQ.processor.consts import FS, IMAGE_TYPES, SEARCH_QUERY
+from ImageQ.processor.consts import FS, IMAGE_TYPES, SEARCH_QUERY, HEADERS
 from ImageQ.search.models import Prediction
 
 
@@ -122,13 +122,8 @@ class BaseSearch(object):
         import requests
         # headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0'}
         # prevent caching
-        headers = {
-            "Cache-Control": 'no-cache',
-            "Connection": "keep-alive",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
-        }
         try:
-            response = requests.get(url, headers=headers)
+            response = requests.get(url, headers=HEADERS)
             html = response.text
         except Exception as e:
             raise Exception('ERROR: {}\n'.format(e))
@@ -186,7 +181,7 @@ class BasePredictor(object):
         """
         files = {'image': open(self.image_path, 'rb')}
         if not isinstance(self.prediction_api, type(None)):
-            r = requests.post(self.prediction_api, files=files)
+            r = requests.post(self.prediction_api, files=files, headers=HEADERS)
         else:
             raise AttributeError("Attribute <prediction_api> is of type None")
         return r.content

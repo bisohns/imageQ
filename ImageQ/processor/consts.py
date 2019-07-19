@@ -165,3 +165,9 @@ SEARCH_QUERY = {
     "Bing": 'https://www.bing.com/search?q={}&count=10&offset=0&first={}',
 
 }
+
+HEADERS = {
+            "Cache-Control": 'no-cache',
+            "Connection": "keep-alive",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
+        }

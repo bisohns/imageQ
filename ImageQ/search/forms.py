@@ -106,6 +106,7 @@ class SearchForm(forms.Form):
         try:
             _predictions = json.loads(bytes.decode(urlpredictor.predict()))
         except:
+            print("failed to retrieve prediction from API, using dummy")
             _predictions = {
         "predictions": [
             {
