@@ -139,4 +139,3 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-PREDICTION_API = "http://localhost:3333/predict"

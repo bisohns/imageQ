@@ -9,16 +9,19 @@ Image search engine powered by Django
 
 [![Heroku App Status](http://heroku-shields.herokuapp.com/bisoncorps-imageq)](https://bisoncorps-imageq.herokuapp.com)
 
-- [ImageQ](#imageq)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-  - [Running Locally](#running-locally)
-  - [Prediction API](#prediction-api)
-  - [Deploy](#deploy)
-  - [Example](#example)
-  - [Code Documentation](#code-documentation)
-  - [Code Structure](#code-structure)
-  - [Todo](#todo)
+- [ImageQ](#ImageQ)
+  - [Getting Started](#Getting-Started)
+    - [Installation](#Installation)
+      - [From Make File](#From-Make-File)
+      - [Step by step Setup](#Step-by-step-Setup)
+  - [Running Locally](#Running-Locally)
+  - [Prediction API](#Prediction-API)
+  - [Deploy](#Deploy)
+  - [Usage](#Usage)
+  - [Example](#Example)
+  - [Code Documentation](#Code-Documentation)
+  - [Code Structure](#Code-Structure)
+  - [Todo](#Todo)
 
 ## Getting Started
 
@@ -92,7 +95,17 @@ The prediction API code can be found at the [repo](https://github.com/bisoncorps
 
 The `master` branch of the repo is linked to automatically [deployed](https://bisoncorps-imageq.herokuapp.com)
 ![Homepage](docs/assets/homepage.png)
-and it sends requests to the deployed [prediction API](https://imageqapi.appspot.com/)
+and it sends requests to the deployed [prediction API](http://172.104.78.30/predict)
+
+## Usage
+
+- Go to [ImageQ Search Engine](https://bisoncorps-imageq.herokuapp.com)
+
+- Select an upload mode from dropdown i.e. (`Image URL`/`Upload`/`Camera(mobile)`)
+
+- Select search engine to use i.e. (`Google`/`Yahoo`/`Bing`)
+
+- Click `Search!` button
 
 ## Example
 

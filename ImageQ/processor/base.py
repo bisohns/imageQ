@@ -24,6 +24,7 @@
         MIT License
         Copyright (c) 2018. Domnan Diretnan. All rights reserved
  """
+import os
 import abc
 import uuid
 from abc import ABCMeta, abstractmethod
@@ -169,6 +170,7 @@ class BasePredictor(object):
         """
         self.__metaclass__ = abc.ABCMeta
         self.prediction_api = None
+        self.image = None
 
     @property
     def image_path(self):
@@ -179,7 +181,17 @@ class BasePredictor(object):
         :returns: json response from the api
         :rtype: dict
         """
-        files = {'image': open(self.image_path, 'rb')}
+        if not os.environ.get('CLOUDINARY_URL'):
+            files = {'image': open(self.image_path, 'rb')}
+        else:
+            # download image from cloudinary
+            try:
+                print(self.image.url)
+                response = requests.get(self.image.url, headers=HEADERS, stream=True)
+                files = {'image': response.raw}
+            except Exception as e:
+                files = {'image': "XXX"}
+                raise Exception('Error retrieving image from cloudinary')
         if not isinstance(self.prediction_api, type(None)):
             r = requests.post(self.prediction_api, files=files, headers=HEADERS)
         else:
