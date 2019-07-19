@@ -103,7 +103,26 @@ class SearchForm(forms.Form):
                         prediction_api=settings.PREDICTION_API,
                         image=prediction_model.image)
         # Store the decoded JSON Predictions
-        _predictions = json.loads(bytes.decode(urlpredictor.predict()))
+        try:
+            _predictions = json.loads(bytes.decode(urlpredictor.predict()))
+        except:
+            _predictions = {
+        "predictions": [
+            {
+            "label": "Unknown",
+            "probability": 000
+            },
+            {
+            "label": "Unknown",
+            "probability": 000
+            },
+            {
+            "label": "Unknown",
+            "probability": 000
+            },
+        ],
+        "success": "false"
+        }
         prediction_model.predictions = _predictions
         prediction_model.save()
         prediction = prediction_model

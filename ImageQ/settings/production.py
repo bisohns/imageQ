@@ -19,4 +19,4 @@ DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
 }
 
-PREDICTION_API = "https://imageqapi.appspot.com/predict"
+PREDICTION_API = "172.104.78.30/predict"

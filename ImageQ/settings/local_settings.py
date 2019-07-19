@@ -18,4 +18,4 @@ DATABASES = {
     }
 }
 
-PREDICTION_API = "https://imageqapi.appspot.com/predict"
+PREDICTION_API = "http://172.104.78.30/predict"

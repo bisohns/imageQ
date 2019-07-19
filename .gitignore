@@ -142,4 +142,4 @@ local_vars.yml
 *.swo
 
 # # media files
-# media/*
+media/*

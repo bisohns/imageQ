@@ -36,7 +36,7 @@ class URLPredictor(BasePredictor):
     Example:
         >>> from ImageQ.search.models import Prediction
         >> prediction_model = Prediction.objects.get(pk=1)
-        >>> predictor = URLPredictor(prediction_api="https://imageqapi.appspot.com/predict", image=prediction_model.image)
+        >>> predictor = URLPredictor(prediction_api="172.104.78.30/predict", image=prediction_model.image)
         >>> predictor.predict()
     """
     def __init__(self, prediction_api, image):
