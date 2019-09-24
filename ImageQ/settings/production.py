@@ -19,7 +19,7 @@ DATABASES = {
     'default': dj_database_url.parse(DATABASE_URL)
 }
 
-PREDICTION_API = "http://172.104.78.30/predict"
+PREDICTION_API = "https://imageqapi.bisoncorps.com/predict"
 
 # cloudinary media storage
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
