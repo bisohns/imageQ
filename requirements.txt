@@ -45,7 +45,7 @@ mccabe==0.6.1
 more-itertools==4.3.0
 numpy==1.15.4
 packaging==19.0
-Pillow==5.2.0
+Pillow==6.2.0
 pip-tools==2.0.2
 pipenv==2018.11.26
 pluggy==0.7.1
